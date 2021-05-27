@@ -34,27 +34,24 @@ export default () => {
             <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-                        Eshop
+                        City
                     </Typography>
                     <nav>
-                        <Link   variant="button" color="textPrimary" to="/signup"
-                                className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Registration
-                        </Link>
-                        <Link   variant="button" color="textPrimary" to="/products"
+                        <Link   variant="button" color="textPrimary" to="/articles"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Products
+                            Articles
                         </Link>
                         <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                            Features
+                            Ads
                         </Link>
                         <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                            Users
+                            Shop
+                        </Link>
+                        <Link   variant="button" color="textPrimary" to="/login"
+                                className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            Login/Registration
                         </Link>
                     </nav>
-                    <Button href="#" color="primary" variant="outlined" className={classes.link}>
-                        Login
-                    </Button>
                 </Toolbar>
             </AppBar>
 
