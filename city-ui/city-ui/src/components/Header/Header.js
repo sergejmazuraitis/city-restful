@@ -41,10 +41,12 @@ export default () => {
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Articles
                         </Link>
-                        <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+                        <Link variant="button" color="textPrimary" to="/ads"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Ads
                         </Link>
-                        <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+                        <Link variant="button" color="textPrimary" to="/shop"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Shop
                         </Link>
                         <Link   variant="button" color="textPrimary" to="/login"
