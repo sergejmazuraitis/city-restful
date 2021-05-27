@@ -5,4 +5,5 @@ public interface Endpoint {
 
     String API_ROOT = "/city/api";
     String ARTICLES = "/articles";
+    String ARTICLE = "/{" + UUID + "}";
 }
