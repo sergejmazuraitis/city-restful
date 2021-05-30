@@ -5,4 +5,6 @@ const fetchArticles = () => HTTP.get('/articles')
         setTimeout(() => resolve(response))
     }))
 
-export { fetchArticles }
+const addNewArticle = (newArticle) => HTTP.post('/articles', newArticle)
+
+export { fetchArticles, addNewArticle }

@@ -12,8 +12,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(ArticleNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionResponse handlingProductNotFoundException(ArticleNotFoundException exception) {
+    public ExceptionResponse handlingArticleNotFoundException(ArticleNotFoundException exception) {
         return new ExceptionResponse(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
-
 }

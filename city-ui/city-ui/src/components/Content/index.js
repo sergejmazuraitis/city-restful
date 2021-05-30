@@ -5,6 +5,8 @@ import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import Ads from "../../pages/Ads/Ads";
 import Shop from "../../pages/Shop/Shop";
+import ArticlesPage from "../../pages/Articles/ArticlesPage";
+import NewArticlePage from "../../pages/NewArticlePage/NewArticlePage";
 
 export default () => (
     <>
@@ -13,7 +15,7 @@ export default () => (
                 <MainPage/>
             </Route>
             <Route exact path="/articles">
-                <Articles/>
+                <ArticlesPage/>
             </Route>
             <Route path="/login">
                 <Login/>
@@ -27,6 +29,10 @@ export default () => (
             <Route path="/shop">
                 <Shop/>
             </Route>
+            <Route path="/new-article">
+                <NewArticlePage/>
+            </Route>
+
         </Switch>
     </>
 )

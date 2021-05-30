@@ -52,6 +52,10 @@ export default () => {
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Login/Registration
                         </Link>
+                        <Link variant="button" color="textPrimary" to="/new-article"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            New Article
+                        </Link>
                     </nav>
                 </Toolbar>
             </AppBar>

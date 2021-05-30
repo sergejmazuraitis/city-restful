@@ -2,11 +2,13 @@ package lt.codeacademy.city.api.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -37,5 +39,8 @@ public class Article {
     @Column(columnDefinition = "VARCHAR(10000)")
     private String content;
 
-    private Date date = new Date();
+//    private Date date = new Date();
+@CreationTimestamp
+private LocalDateTime timestamp = LocalDateTime.now();
+
 }

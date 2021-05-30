@@ -1,4 +1,4 @@
-INSERT INTO ARTICLES (id, name, description, content, date )
+INSERT INTO ARTICLES (id, name, description, content, timestamp )
 VALUES ('acf49189-e872-48b0-949e-63d455f4fd86',
         'Pirmas straipsnis',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non.',

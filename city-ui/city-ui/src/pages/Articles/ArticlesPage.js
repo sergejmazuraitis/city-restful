@@ -1,6 +1,6 @@
 import Cards from "../../components/Cards/Cards"
 
-const Articles = () => {
+const ArticlesPage = () => {
 
     return (
         <>
@@ -11,4 +11,4 @@ const Articles = () => {
     )
 }
 
-export default Articles
+export default ArticlesPage
