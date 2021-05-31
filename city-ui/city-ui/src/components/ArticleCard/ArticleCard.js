@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import {useDispatch, useSelector} from "react-redux";
+import { useParams } from 'react-router-dom';
+import {fetchArticleById, fetchArticles} from "../../api/articlesApi";
+
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -18,30 +22,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MediaCard() {
+export default function ArticleCard() {
     const classes = useStyles();
-
+    const { id } = useParams()
+    const [article, setArticle] = useState({})
+    useEffect(() => {
+        fetchArticleById(id)
+            .then(({data}) => {
+                setArticle(data)
+            })
+    }, [])
     return (
         <div className={classes.heroContent}>
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Album layout
+                    {article.name}
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    Something short and leading about the collection below—its contents, the creator, etc.
-                    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-                    entirely.
+                    {article.content}
                 </Typography>
                 <div className={classes.heroButtons}>
                     <Grid container spacing={2} justify="center">
                         <Grid item>
                             <Button variant="contained" color="primary">
-                                Main call to action
+                               Change Article
                             </Button>
                         </Grid>
                         <Grid item>
                             <Button variant="outlined" color="primary">
-                                Secondary action
+                                Delete Article
                             </Button>
                         </Grid>
                     </Grid>

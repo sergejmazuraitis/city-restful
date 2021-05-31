@@ -32,7 +32,7 @@ export default () => (
             <Route path="/new-article">
                 <NewArticlePage/>
             </Route>
-            <Route path="/article">
+            <Route path="/article/:id">
                 <ArticlePage/>
             </Route>
 

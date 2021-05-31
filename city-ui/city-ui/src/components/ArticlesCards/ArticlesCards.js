@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {fetchArticles} from "../../api/articlesApi";
+import {NavLink} from "react-router-dom";
+import Link from "@material-ui/core/Link";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
     cardContent: {
         flexGrow: 1,
     },
+    link: {
+        margin: theme.spacing(1, 1.5),
+    },
+    active: {
+        fontWeight: "bolder",
+        color: "blue"
+    }
+
 }));
 
 
@@ -41,6 +51,7 @@ export default function Album() {
     useEffect(() => {
         fetchArticles()
             .then(({data}) => {
+                console.log(data)
                 setArticles(data)
             })
     }, [])
@@ -66,9 +77,10 @@ export default function Album() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" color="primary">
-                                        View
-                                    </Button>
+                                    <Link variant="button" color="textPrimary" to={"/article/" + article.id}
+                                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                        Read Article
+                                    </Link>
                                     <Button size="small" color="primary">
                                         Edit
                                     </Button>
