@@ -36,13 +36,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Album() {
     const classes = useStyles();
     const [articles, setArticles] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchArticles()
             .then(({data}) => {
                 setArticles(data)
             })
-    })
+    }, [])
 
     return (
         <>

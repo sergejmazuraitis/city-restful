@@ -1,12 +1,12 @@
 import {Route, Switch} from "react-router-dom"
 import MainPage from "../../pages/MainPage/MainPage";
-import Articles from "../../pages/Articles/ArticlesPage";
+import ArticlesPage from "../../pages/Articles/ArticlesPage";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import Ads from "../../pages/Ads/Ads";
 import Shop from "../../pages/Shop/Shop";
-import ArticlesPage from "../../pages/Articles/ArticlesPage";
 import NewArticlePage from "../../pages/NewArticlePage/NewArticlePage";
+import ArticlePage from "../../pages/ArticlePage/ArticlePage";
 
 export default () => (
     <>
@@ -31,6 +31,9 @@ export default () => (
             </Route>
             <Route path="/new-article">
                 <NewArticlePage/>
+            </Route>
+            <Route path="/article">
+                <ArticlePage/>
             </Route>
 
         </Switch>
