@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(Endpoint.API_ROOT + Endpoint.ARTICLES)
+@RequestMapping(Endpoint.ARTICLES)
 public class ArticleController {
 
     private final ArticleService articleService;
