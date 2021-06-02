@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
-    private UUID userId;
+    private UUID id;
 
     @NotNull
     @Size(min = 2, max = 250)
