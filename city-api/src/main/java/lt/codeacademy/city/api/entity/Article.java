@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -39,8 +38,6 @@ public class Article {
     @Column(columnDefinition = "VARCHAR(10000)")
     private String content;
 
-//    private Date date = new Date();
-@CreationTimestamp
-private LocalDateTime timestamp = LocalDateTime.now();
-
+    @CreationTimestamp
+    private LocalDateTime timestamp = LocalDateTime.now();
 }
