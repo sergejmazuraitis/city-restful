@@ -45,4 +45,7 @@ public class User {
     @NotNull
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$")
     private String password;
+
+    @ManyToMany
+    private Set<Role> roles;
 }
