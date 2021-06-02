@@ -1,4 +1,4 @@
-package lt.codeacademy.city.api;
+package lt.codeacademy.city.api.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.codeacademy.city.api.security.JwtAuthenticationFilter;
