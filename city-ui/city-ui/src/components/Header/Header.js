@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
 import {NavLink} from "react-router-dom";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -56,6 +57,7 @@ export default () => {
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             New Article
                         </Link>
+                        <LanguageSelector/>
                     </nav>
                 </Toolbar>
             </AppBar>
