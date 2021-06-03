@@ -68,6 +68,19 @@ const ArticleCard = () => {
                                 Delete Article
                             </Button>
                         </Grid>
+                        <Grid item>
+                            <Link variant="button" color="textPrimary" to={"/comment/" + id}
+                                  className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                Comment Article
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link variant="button" color="textPrimary" to={"/comments/" + id}
+                                  className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                Read Comments
+                            </Link>
+                        </Grid>
+
                     </Grid>
                 </div>
             </Container>

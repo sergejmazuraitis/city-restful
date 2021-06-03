@@ -8,6 +8,7 @@ import Shop from "../../pages/Shop/Shop";
 import NewArticlePage from "../../pages/NewArticlePage/NewArticlePage";
 import ArticlePage from "../../pages/ArticlePage/ArticlePage";
 import ChangeArticlePage from "../../pages/ChangeArticlePage/ChangeArticlePage";
+import CommentsPage from "../../pages/CommentsPage/CommentsPage";
 
 export default () => (
     <>
@@ -39,6 +40,10 @@ export default () => (
             <Route path="/change-article/:id">
                 <ChangeArticlePage/>
             </Route>
+            <Route path="/comments/:id">
+                <CommentsPage/>
+            </Route>
+
         </Switch>
     </>
 )
