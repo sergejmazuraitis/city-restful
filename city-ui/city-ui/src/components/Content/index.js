@@ -7,6 +7,7 @@ import Ads from "../../pages/Ads/Ads";
 import Shop from "../../pages/Shop/Shop";
 import NewArticlePage from "../../pages/NewArticlePage/NewArticlePage";
 import ArticlePage from "../../pages/ArticlePage/ArticlePage";
+import ChangeArticlePage from "../../pages/ChangeArticlePage/ChangeArticlePage";
 
 export default () => (
     <>
@@ -35,7 +36,9 @@ export default () => (
             <Route path="/article/:id">
                 <ArticlePage/>
             </Route>
-
+            <Route path="/change-article/:id">
+                <ChangeArticlePage/>
+            </Route>
         </Switch>
     </>
 )
