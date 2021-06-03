@@ -45,7 +45,7 @@ public class CommentService {
     }
 
     public List<Comment> getCommentsByArticleId(UUID id) {
-        return commentRepository.findAllById(id);
+        return commentRepository.findAllByArticleId(id);
     }
 
     public boolean validateIsUserComment(UUID id, UUID userId, String role) {
