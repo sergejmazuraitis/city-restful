@@ -6,6 +6,7 @@ import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
 import {NavLink} from "react-router-dom";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
     const classes = useStyles();
-
+    const {t} = useTranslation('header');
     return (
         <React.Fragment>
             <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
@@ -39,15 +40,11 @@ export default () => {
                     <nav>
                         <Link variant="button" color="textPrimary" to="/articles"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Articles
+                            {t('Articles')}
                         </Link>
                         <Link variant="button" color="textPrimary" to="/ads"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Ads
-                        </Link>
-                        <Link variant="button" color="textPrimary" to="/shop"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Shop
                         </Link>
                         <Link variant="button" color="textPrimary" to="/login"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
