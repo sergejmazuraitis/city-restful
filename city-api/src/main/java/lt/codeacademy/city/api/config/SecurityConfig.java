@@ -1,6 +1,7 @@
 package lt.codeacademy.city.api.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lt.codeacademy.city.api.Endpoint;
 import lt.codeacademy.city.api.security.JwtAuthenticationFilter;
 import lt.codeacademy.city.api.security.JwtAuthorizationFilter;
 import lt.codeacademy.city.api.security.JwtService;
@@ -44,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
+                    .antMatchers(Endpoint.ARTICLES, Endpoint.ARTICLE + "//**", Endpoint.COMMENTS).permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .exceptionHandling()
