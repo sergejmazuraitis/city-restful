@@ -274,7 +274,7 @@ INSERT INTO USERS_ROLES (user_id, roles_id) VALUES
 ('7a580a64-a414-40dc-8861-52aa79ff2258', 'acf49189-e872-48b0-949e-63d455f4fd86'),
 ('7a580a64-a414-40dc-8861-52aa79ff2258', '7a580a64-a414-40dc-8861-52aa79ff2258'); /* admin -> USER, ADMIN ROLES */
 
-INSERT INTO COMMENTS (comment_id, date, content, article_id, user_id)
+INSERT INTO COMMENTS (comment_id, timestamp, content, article_id, user_id)
 VALUES ('9f650ee7-da8c-430d-99e5-a771aa98c64a', '2021-04-03', 'Bandau irašyti pirmą komentarą',
         'acf49189-e872-48b0-949e-63d455f4fd86', 'acf49189-e872-48b0-949e-63d455f4fd86'),
        ('9f650ee7-da8c-430d-99e5-a771aa98c65a', '2021-04-04', 'Bandau irašyti pirmą komentarą pakartotinai',
