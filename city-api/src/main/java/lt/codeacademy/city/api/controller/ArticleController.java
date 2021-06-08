@@ -25,6 +25,7 @@ public class ArticleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public void addArticle(@Valid @RequestBody Article article) {
         articleService.addArticle(article);
     }
@@ -41,12 +42,14 @@ public class ArticleController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateArticle(@Valid @RequestBody Article article) {
         articleService.updateArticle(article);
     }
 
     @DeleteMapping(Endpoint.ARTICLE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteArticle(@PathVariable(Endpoint.UUID) UUID uuid) {
         articleService.deleteArticle(uuid);
     }
