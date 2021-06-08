@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import {Box, Toolbar} from "@material-ui/core";
+import {Toolbar} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
     const classes = useStyles();
-    const userFullName = useSelector(state => state.user.loginUser?.fullName)
+    const loginUser = useSelector(state => state.user.loginUser)
     const {t} = useTranslation('header');
     return (
         <>
@@ -53,26 +53,33 @@ export default () => {
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Login/Registration
                         </Link>
-                        <Link variant="button" color="textPrimary" to="/new-article"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            New Article
-                        </Link>
-                            {userFullName ?
-                                <>
-                                    <Typography variant="h6" component="span">
-                                        Sveiki, {userFullName}
-                                    </Typography>
-                                    <Button color="secondary" variant="contained" className={classes.link}>
-                                        Logout
-                                    </Button>
-                                </>
+
+                        {
+                            loginUser?.roles.includes("ADMIN") ?
+                                <Link variant="button" color="textPrimary" to="/new-article"
+                                      className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                    New Article
+                                </Link>
                                 :
-                                <>
-                                    <Button color="primary" to="/login" variant="contained" component={NavLink}>
-                                        Login/Registration
-                                    </Button>
-                                </>
-                            }
+                                ""
+                        }
+
+                        {loginUser?.fullName ?
+                            <>
+                                <Typography variant="h6" component="span">
+                                    Sveiki, {loginUser.fullName}
+                                </Typography>
+                                <Button color="secondary" variant="contained" className={classes.link}>
+                                    Logout
+                                </Button>
+                            </>
+                            :
+                            <>
+                                <Button color="primary" to="/login" variant="contained" component={NavLink}>
+                                    Login/Registration
+                                </Button>
+                            </>
+                        }
                         <LanguageSelector/>
                     </nav>
                 </Toolbar>
