@@ -1,12 +1,14 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import {Toolbar} from "@material-ui/core";
+import {Box, Toolbar} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
 import {NavLink} from "react-router-dom";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -29,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
     const classes = useStyles();
+    const userFullName = useSelector(state => state.user.loginUser?.fullName)
     const {t} = useTranslation('header');
     return (
-        <React.Fragment>
+        <>
             <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
@@ -54,11 +57,27 @@ export default () => {
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             New Article
                         </Link>
+                            {userFullName ?
+                                <>
+                                    <Typography variant="h6" component="span">
+                                        Sveiki, {userFullName}
+                                    </Typography>
+                                    <Button color="secondary" variant="contained" className={classes.link}>
+                                        Logout
+                                    </Button>
+                                </>
+                                :
+                                <>
+                                    <Button color="primary" to="/login" variant="contained" component={NavLink}>
+                                        Login/Registration
+                                    </Button>
+                                </>
+                            }
                         <LanguageSelector/>
                     </nav>
                 </Toolbar>
             </AppBar>
 
-        </React.Fragment>
+        </>
     )
 }
