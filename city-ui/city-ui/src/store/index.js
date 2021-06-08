@@ -12,6 +12,9 @@ const constructStore = () => {
         middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
         preloadedState: {}
     })
+
+    return store
 }
 
-export default constructStore
+const store = constructStore()
+export default store

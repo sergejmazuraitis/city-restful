@@ -5,6 +5,9 @@ import * as Yup from "yup";
 import {Divider} from "@material-ui/core";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import {loginUser} from "../../api/authApi";
+import {useDispatch} from "react-redux";
+import {login as setLogin} from "../../store/slices/userSllice";
+import {useHistory} from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
@@ -13,13 +16,21 @@ const validationSchema = Yup.object().shape({
         .required()
 })
 const Login = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const postLogin = (loginData, {setSubmitting}) => {
         setSubmitting(true)
 
         loginUser(loginData)
-            .then(({headers: {authorization}}) => {
-                console.log("JWT", authorization)
+            .then(({data: loginUser, headers: {authorization}}) => {
+                dispatch(
+                    setLogin({
+                        loginUser,
+                        jwt: authorization
+                    })
+                )
+                history.push('/')
             })
             .finally(() => setSubmitting(false))
     }
@@ -53,13 +64,13 @@ const Login = () => {
                                 <Button type="submit"
                                         disabled={props.isSubmitting}
                                         style={{
-                                    marginTop: "5px",
-                                    padding: "20px 30px",
-                                    borderRadius: "5px",
-                                    border: "1px solid",
-                                    borderColor: "#bababa",
-                                    width: "100%"
-                                }}>Log in</Button>
+                                            marginTop: "5px",
+                                            padding: "20px 30px",
+                                            borderRadius: "5px",
+                                            border: "1px solid",
+                                            borderColor: "#bababa",
+                                            width: "100%"
+                                        }}>Log in</Button>
                                 :
                                 <span>Submitting...</span>}
                         </Form>
