@@ -1,6 +1,5 @@
 package lt.codeacademy.city.api.security;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +31,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         String authorizationHeader = request.getHeader("Authorization");
 
-        if (isEmpty(authorizationHeader) && !authorizationHeader.startsWith("Bearer")) {
+        if (isEmpty(authorizationHeader) ||
+                !authorizationHeader.startsWith("Bearer") ||
+                request.getRequestURI().endsWith("/login")) {
             chain.doFilter(request, response);
             return;
         }
