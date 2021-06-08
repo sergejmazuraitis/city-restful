@@ -9,6 +9,7 @@ import NewArticlePage from "../../pages/NewArticlePage/NewArticlePage";
 import ArticlePage from "../../pages/ArticlePage/ArticlePage";
 import ChangeArticlePage from "../../pages/ChangeArticlePage/ChangeArticlePage";
 import CommentsPage from "../../pages/CommentsPage/CommentsPage";
+import SecuredRoute from "../SecuredRoute/SecuredRoute";
 
 export default () => (
     <>
@@ -31,9 +32,9 @@ export default () => (
             <Route path="/shop">
                 <Shop/>
             </Route>
-            <Route path="/new-article">
+            <SecuredRoute path="/new-article" roles={["ADMIN"]}>
                 <NewArticlePage/>
-            </Route>
+            </SecuredRoute>
             <Route path="/article/:id">
                 <ArticlePage/>
             </Route>
