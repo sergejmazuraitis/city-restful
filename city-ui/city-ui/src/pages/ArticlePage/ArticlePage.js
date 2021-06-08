@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useParams} from 'react-router-dom';
 import {fetchArticleById, deleteArticleById} from "../../api/articlesApi";
 import Link from "@material-ui/core/Link";
+import {CircularProgress} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,7 @@ const ArticleCard = () => {
     const classes = useStyles();
     const { id } = useParams()
     const [article, setArticle] = useState({})
+    const [loading, setLoading] = useState(true)
 
     const deleteArticle = (id) =>  {
         deleteArticleById(id)
@@ -45,8 +47,11 @@ const ArticleCard = () => {
             .then(({data}) => {
                 setArticle(data)
             })
+            .finally(() => setLoading(false))
     }, [])
-    return (
+
+    return loading ? ( <CircularProgress/> ) :
+         (
         <div className={classes.heroContent}>
             <Container maxWidth="md">
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -85,7 +90,7 @@ const ArticleCard = () => {
                 </div>
             </Container>
         </div>
-    );
+    )
 }
 
 export default ArticleCard
