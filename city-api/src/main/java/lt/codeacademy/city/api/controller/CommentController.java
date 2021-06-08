@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(Endpoint.COMMENTS)
+@RequestMapping
 public class CommentController {
 
     private final CommentService commentService;
@@ -20,25 +20,25 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping
-    public List<Comment> getCommentsByArticleId (@PathVariable(Endpoint.UUID)UUID uuid) {
+    @GetMapping(Endpoint.COMMENTS)
+    public List<Comment> getCommentsByArticleId(@PathVariable(Endpoint.UUID) UUID uuid) {
         return commentService.getCommentsByArticleId(uuid);
     }
 
     @DeleteMapping(Endpoint.COMMENT)
-    public void deleteComment(@PathVariable(Endpoint.COMMENT_UUID)UUID uuid) {
+    public void deleteComment(@PathVariable(Endpoint.UUID) UUID uuid) {
         commentService.deleteComment(uuid);
     }
 
-    @PostMapping
+    @PostMapping(Endpoint.NEW_COMMENT)
     @ResponseStatus(HttpStatus.CREATED)
     public void creteNewComment(@Valid @RequestBody Comment comment) {
         commentService.addComment(comment);
     }
 
-    @PutMapping
+    @PutMapping(Endpoint.NEW_COMMENT)
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateComment(@Valid @RequestBody Comment comment){
+    public void updateComment(@Valid @RequestBody Comment comment) {
         commentService.updateComment(comment);
     }
 }

@@ -56,6 +56,6 @@ public class CommentService {
         } else if (role.equals("ADMIN")) {
             return true;
         }
-        return comment.getUser().getId().equals(userId);
+        return comment.getUserId().equals(userId);
     }
 }

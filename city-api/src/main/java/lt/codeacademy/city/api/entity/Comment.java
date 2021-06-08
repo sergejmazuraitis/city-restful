@@ -1,12 +1,16 @@
 package lt.codeacademy.city.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -22,7 +26,8 @@ public class Comment {
     @Type(type = "uuid-char")
     private UUID commentId;
 
-    private Date date = new Date();
+    @CreationTimestamp
+    private LocalDateTime timestamp = LocalDateTime.now();
 
     @NotNull
     @Size(min = 1,
@@ -30,11 +35,9 @@ public class Comment {
             message = "{validation.size.name}")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "article_id", nullable = false)
-    private Article article;
+    @Type(type = "uuid-char")
+    private UUID articleId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Type(type = "uuid-char")
+    private UUID userId;
 }
