@@ -67,7 +67,6 @@ const CommentsPage = () => {
         deleteCommentById(id)
     }
 
-
     const classes = useStyle()
 
     return loading ? (<CircularProgress/>)
@@ -106,7 +105,7 @@ const CommentsPage = () => {
                                                     </TableCell>
                                                     <TableCell align="right">
                                                         <Button onClick={() => deleteComment(comment.commentId)} variant="outlined" color="primary">Delete</Button>
-                                                        <Button variant="outlined" color="primary">Change</Button>
+                                                        <Button variant="outlined" color="primary" >Change</Button>
                                                     </TableCell>
                                                 </TableRow>
                                             ))}

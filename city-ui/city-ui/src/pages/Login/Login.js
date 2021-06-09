@@ -7,7 +7,21 @@ import FormikInput from "../../components/FormikInput/FormikInput";
 import {loginUser} from "../../api/authApi";
 import {useDispatch} from "react-redux";
 import {login as setLogin} from "../../store/slices/userSllice";
-import {useHistory} from "react-router-dom";
+import {NavLink, useHistory, useLocation} from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import React from "react";
+import {makeStyles} from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+    link: {
+        margin: theme.spacing(1, 1.5),
+    },
+    active: {
+        fontWeight: "bolder",
+        color: "blue"
+    }
+}));
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
@@ -16,8 +30,11 @@ const validationSchema = Yup.object().shape({
         .required()
 })
 const Login = () => {
+
+    const classes = useStyles();
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
 
     const postLogin = (loginData, {setSubmitting}) => {
         setSubmitting(true)
@@ -30,6 +47,8 @@ const Login = () => {
                         jwt: authorization
                     })
                 )
+                const from = location.state?.from
+
                 history.push('/')
             })
             .finally(() => setSubmitting(false))
@@ -77,14 +96,10 @@ const Login = () => {
                         <Divider style={{margin: '20px 0'}}/>
                         <Form style={{margin: "0 40px", textAlign: "center"}}>
                             {!props.isSubmitting ?
-                                <Button href={'/signup'} className={'btn10'} style={{
-                                    marginTop: "5px",
-                                    padding: "20px 30px",
-                                    borderRadius: "5px",
-                                    border: "1px solid",
-                                    borderColor: "#bababa",
-                                    width: "100%"
-                                }}>Sign up</Button>
+                                <Link variant="button" color="textPrimary" to="/register"
+                                      className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                    Registration
+                                </Link>
                                 :
                                 <span>Submitting...</span>}
                         </Form>

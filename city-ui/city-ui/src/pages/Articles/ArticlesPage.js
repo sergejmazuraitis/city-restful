@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import {fetchArticles} from "../../api/articlesApi";
 import {NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
+import {CircularProgress} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,40 +53,43 @@ export default function Album() {
             .then(({data}) => {
                 console.log(data)
                 setArticles(data)
-            })
+            }).finally(() => setLoading(false))
+
     }, [])
 
-    return (
-        <>
-            <Container className={classes.cardGrid} maxWidth="md">
-                <Grid container spacing={4}>
-                    {articles.map((article) => (
-                        <Grid item key={article} xs={12} sm={6} md={4}>
-                            <Card className={classes.card}>
-                                <CardMedia
-                                    className={classes.cardMedia}
-                                    image="https://source.unsplash.com/random"
-                                    title="Image title"
-                                />
-                                <CardContent className={classes.cardContent}>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {article.name}
-                                    </Typography>
-                                    <Typography>
-                                        {article.description}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Link variant="button" color="textPrimary" to={"/article/" + article.id}
-                                          className={classes.link} activeClassName={classes.active} component={NavLink}>
-                                        Read Article
-                                    </Link>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
-        </>
-    );
+    return loading ? (<CircularProgress/>) :
+        (
+            <>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {articles.map((article) => (
+                            <Grid item key={article} xs={12} sm={6} md={4}>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        className={classes.cardMedia}
+                                        image="https://source.unsplash.com/random"
+                                        title="Image title"
+                                    />
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {article.name}
+                                        </Typography>
+                                        <Typography>
+                                            {article.description}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Link variant="button" color="textPrimary" to={"/article/" + article.id}
+                                              className={classes.link} activeClassName={classes.active}
+                                              component={NavLink}>
+                                            Read Article
+                                        </Link>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </>
+        );
 }
