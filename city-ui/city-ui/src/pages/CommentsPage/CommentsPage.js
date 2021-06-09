@@ -12,12 +12,12 @@ import {
 import {makeStyles} from "@material-ui/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import {fetchComments, postNewComment, deleteCommentById} from "../../api/commentsApi";
+import {deleteCommentById, fetchComments, postNewComment} from "../../api/commentsApi";
 import {useParams} from "react-router-dom";
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import FormikInput from "../../components/FormikInput/FormikInput";
-import {deleteArticleById, fetchArticleById} from "../../api/articlesApi";
+import {fetchArticleById} from "../../api/articlesApi";
 import {useSelector} from "react-redux";
 
 const validationSchema = Yup.object().shape({
@@ -31,13 +31,20 @@ const useStyle = makeStyles({
     }
 })
 const CommentsPage = () => {
+
     const {id} = useParams();
     const userId = useSelector(state => state.user.loginUser?.id);
-    const st = useSelector(state => state.user)
-    console.log('state', st)
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(true)
     const [article, setArticle] = useState({})
+    const initialValues = {
+        content: '',
+        articleId: id,
+        userId: userId
+    }
+    const scrollToElement = (elemId) => {
+        document.getElementById(elemId).scrollIntoView();
+    }
 
     useEffect(() => {
         fetchArticleById(id)
@@ -47,7 +54,6 @@ const CommentsPage = () => {
             .finally(() => setLoading(false))
     }, [])
 
-
     useEffect(() => {
         // componentDidMount && componentDidUpdate
         fetchComments(id)
@@ -56,26 +62,34 @@ const CommentsPage = () => {
             }).finally(() => setLoading(false))
     }, [])
 
-    const postComment = (postData, {setSubmitting}) => {
+    const postComment = (postData, {setSubmitting, resetForm}) => {
         setSubmitting(true)
 
         postNewComment(postData)
-            .finally(() => setSubmitting(false))
+            .then(() => {
+                resetForm(initialValues)
+                fetchComments(id)
+                    .then(({data}) => {
+                        setComments(data)
+                    })
+            })
+            .finally(() => {
+                setSubmitting(false)
+            })
     }
 
-    const deleteComment = (id) =>  {
-        deleteCommentById(id)
+    const deleteComment = (comment) => {
+
+        deleteCommentById(comment.commentId)
+            .finally(
+                setComments(comments.filter(com => com.commentId !== comment.commentId))
+            )
     }
 
     const classes = useStyle()
 
-    return loading ? (<CircularProgress/>)
-        :
-        (<Formik initialValues={{
-            content: '',
-            articleId: id,
-            userId: userId
-        }}
+    return (
+        <Formik initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={postComment}
         >
@@ -104,16 +118,24 @@ const CommentsPage = () => {
                                                         {comment.content}
                                                     </TableCell>
                                                     <TableCell align="right">
-                                                        <Button onClick={() => deleteComment(comment.commentId)} variant="outlined" color="primary">Delete</Button>
-                                                        <Button variant="outlined" color="primary" >Change</Button>
+                                                        <Button onClick={() => deleteComment(comment)}
+                                                                variant="outlined" color="primary">Delete</Button>
+                                                        <span>{comment.commentId}</span>
+                                                        <Button onClick={() => scrollToElement("cont")}
+                                                                variant="outlined" color="primary">Change</Button>
                                                     </TableCell>
                                                 </TableRow>
                                             ))}
 
                                         <TableRow>
                                             <TableCell>
-                                                <FormikInput name="content" label="Content" multiline rows={5}
-                                                             error={props.touched.content && !!props.errors.content}/>
+                                                <FormikInput
+                                                    id="cont"
+                                                    name="content"
+                                                    label="Content"
+                                                    defaultValue="Content"
+                                                    multiline rows={5}
+                                                    error={props.touched.content && !!props.errors.content}/>
                                             </TableCell>
                                             <TableCell>
                                                 {!props.isSubmitting ?
@@ -121,6 +143,7 @@ const CommentsPage = () => {
                                                             type="submit">Submit</Button>
                                                     :
                                                     <span>Submitting...</span>}
+
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

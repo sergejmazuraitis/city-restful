@@ -25,6 +25,12 @@ public class CommentController {
         return commentService.getCommentsByArticleId(uuid);
     }
 
+    @GetMapping(Endpoint.COMMENT)
+    public Comment getCommentById(@PathVariable(Endpoint.UUID) UUID uuid) {
+        Comment c = commentService.getCommentById(uuid);
+        return c;
+    }
+
     @DeleteMapping(Endpoint.COMMENT)
     public void deleteComment(@PathVariable(Endpoint.UUID) UUID uuid) {
         commentService.deleteComment(uuid);
