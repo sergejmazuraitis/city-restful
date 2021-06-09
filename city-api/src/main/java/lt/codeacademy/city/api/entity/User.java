@@ -45,11 +45,11 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).{6,}$")
     private String password;
 
     @ManyToMany
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -86,4 +86,7 @@ public class User implements UserDetails {
         return password;
     }
 
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 }
