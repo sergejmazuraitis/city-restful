@@ -10,6 +10,8 @@ import ArticlePage from "../../pages/ArticlePage/ArticlePage";
 import ChangeArticlePage from "../../pages/ChangeArticlePage/ChangeArticlePage";
 import CommentsPage from "../../pages/CommentsPage/CommentsPage";
 import SecuredRoute from "../SecuredRoute/SecuredRoute";
+import MyAccountPage from "../../pages/MyAccountPage/MyAccountPage";
+import ChangeUserPage from "../../pages/ChngeUserPage/ChangeUserPage";
 
 export default () => (
     <>
@@ -43,6 +45,12 @@ export default () => (
             </Route>
             <Route path="/comments/:id">
                 <CommentsPage/>
+            </Route>
+            <Route path="/account">
+                <MyAccountPage/>
+            </Route>
+            <Route path="/user/:id">
+                <ChangeUserPage/>
             </Route>
 
         </Switch>

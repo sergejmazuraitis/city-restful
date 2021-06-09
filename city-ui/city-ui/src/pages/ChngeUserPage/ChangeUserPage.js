@@ -1,11 +1,13 @@
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
-import {userRegister} from "../../api/userRegisterApi";
+import {getUserById, updateUser, userRegister} from "../../api/userRegisterApi";
 import Container from "@material-ui/core/Container";
-import {Paper} from "@material-ui/core";
+import {CircularProgress, Paper} from "@material-ui/core";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import Button from "@material-ui/core/Button";
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory, useLocation, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {fetchArticleById} from "../../api/articlesApi";
 
 
 const validationSchema = Yup.object().shape({
@@ -25,14 +27,26 @@ const validationSchema = Yup.object().shape({
         .oneOf([Yup.ref('password')], "Blogas")
 })
 
-const UserRegistration = () => {
+const ChangeUserPage = () => {
     // const {t} = useTranslation('register');
 
+    const {id} = useParams()
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState()
     const history = useHistory()
     const location = useLocation()
-    const postNewUser = (userData, {setSubmitting}) => {
+
+    useEffect(() => {
+        getUserById(id)
+            .then(({data}) => {
+                setUser(data)
+            })
+            .finally(() => setLoading(false))
+    }, [])
+
+    const updateNewUser = (userData, {setSubmitting}) => {
         setSubmitting(true)
-        userRegister(userData)
+        updateUser(userData)
             .then(() => {
                 const from = location.state?.from
 
@@ -42,19 +56,21 @@ const UserRegistration = () => {
             .finally(() => setSubmitting(false))
 
     }
-    return (
-
+    return loading ? ( <CircularProgress/> ) :
+    (
         <Formik initialValues={{
-            name: '',
-            surname: '',
-            phone: '',
-            email: '',
+            id: id,
+            name: user.name,
+            surname: user.surname,
+            phone: user.phone,
+            email: user.email,
             password: '',
-            username: '',
-            roles: ["USER"]
+            repeatPassword: '',
+            username: user.username
+
         }}
                 validationSchema={validationSchema}
-                onSubmit={postNewUser}>
+                onSubmit={updateNewUser}>
 
             {
                 props => (
@@ -65,18 +81,21 @@ const UserRegistration = () => {
                                     <div>
                                         <FormikInput name="name"
                                                      label="Name"
+                                                     defaultValue='Name'
                                                      error={props.touched.name && !!props.errors.name}
                                                      placeholder="Name"/>
                                     </div>
                                     <div>
                                         <FormikInput name="surname"
-                                                     label="LastName"
+                                                     label="Last Name"
+                                                     defaultValue='Last Name'
                                                      error={props.touched.surname && !!props.errors.surname}
-                                                     placeholder="LastName"/>
+                                                     placeholder="Last Name"/>
                                     </div>
                                     <div>
                                         <FormikInput name="username"
                                                      label="Username"
+                                                     defaultValue='Username'
                                                      error={props.touched.surname && !!props.errors.surname}
                                                      placeholder="username"/>
                                     </div>
@@ -84,12 +103,14 @@ const UserRegistration = () => {
                                     <div>
                                         <FormikInput name="email"
                                                      label="Email"
+                                                     defaultValue='Email'
                                                      error={props.touched.email && !!props.errors.email}
                                                      placeholder="Email"/>
                                     </div>
                                     <div>
                                         <FormikInput name="phone"
                                                      label="Phone Number"
+                                                     defaultValue='Phone Number'
                                                      error={props.touched.email && !!props.errors.email}
                                                      placeholder="Phone Number"/>
                                     </div>
@@ -97,6 +118,7 @@ const UserRegistration = () => {
                                     <div>
                                         <FormikInput name="password"
                                                      label="Password"
+                                                     defaultValue='Password'
                                                      error={props.touched.password && !!props.errors.password}
                                                      placeholder="Password"
                                                      type="password"/>
@@ -104,6 +126,7 @@ const UserRegistration = () => {
                                     <div>
                                         <FormikInput name="repeatPassword"
                                                      label="Password Confirm"
+                                                     defaultValue='Password Confirm'
                                                      error={props.touched.repeatPassword && !!props.errors.repeatPassword}
                                                      placeholder="Password Confirm"
                                                      type="password"/>
@@ -123,4 +146,4 @@ const UserRegistration = () => {
     )
 }
 
-export default UserRegistration
+export default ChangeUserPage

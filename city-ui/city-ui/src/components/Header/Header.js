@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import {Toolbar} from "@material-ui/core";
+import {IconButton, Menu, MenuItem, Toolbar} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
@@ -9,6 +9,8 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
+import Select from "@material-ui/core/Select";
+import {AccountCircle} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -33,6 +35,21 @@ export default () => {
     const classes = useStyles();
     const loginUser = useSelector(state => state.user.loginUser)
     const {t} = useTranslation('header');
+    const [auth, setAuth] = React.useState(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleChange = (event) => {
+        setAuth(event.target.checked);
+    };
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return (
         <>
             <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
@@ -48,10 +65,6 @@ export default () => {
                         <Link variant="button" color="textPrimary" to="/ads"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
                             Ads
-                        </Link>
-                        <Link variant="button" color="textPrimary" to="/login"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Login/Registration
                         </Link>
 
                         {
@@ -69,9 +82,47 @@ export default () => {
                                 <Typography variant="h6" component="span">
                                     Sveiki, {loginUser.fullName}
                                 </Typography>
-                                <Button color="secondary" variant="contained" className={classes.link}>
+                                <Button variant="button" color="textPrimary" onClick={() => {window.location.href="/"}}
+                                        className={classes.link} activeClassName={classes.active} >
                                     Logout
                                 </Button>
+                                {auth && (
+                                    <>
+                                        <IconButton
+                                            aria-label="account of current user"
+                                            aria-controls="menu-appbar"
+                                            aria-haspopup="true"
+                                            onClick={handleMenu}
+                                            color="inherit"
+                                        >
+                                            <AccountCircle />
+                                        </IconButton>
+                                        <Menu
+                                            id="menu-appbar"
+                                            anchorEl={anchorEl}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            keepMounted
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            open={open}
+                                            onClose={handleClose}
+                                        >
+                                            <MenuItem onClick={handleClose}>
+                                                <Link variant="button" color="textPrimary" to="/account"
+                                                      className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                                   My Account
+                                                </Link>
+
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>Properties</MenuItem>
+                                        </Menu>
+                                    </>
+                                )}
                             </>
                             :
                             <>
