@@ -5,9 +5,10 @@ public interface Endpoint {
 
     String API_ROOT = "/city/api";
     String ARTICLES = "/articles";
-    String ARTICLE = "/{" + UUID + "}";
-    String COMMENTS = ARTICLES + ARTICLE + "/comments";
+    String UUID_VAR = "/{" + UUID + "}";
+    String COMMENTS = ARTICLES + UUID_VAR + "/comments";
     String COMMENT = ARTICLES + "/comment/{" + UUID + "}";
     String NEW_COMMENT = ARTICLES + "/comment";
     String LOGIN = "/login";
+    String USER = "/user";
 }
