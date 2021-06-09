@@ -35,7 +35,7 @@ public class ArticleController {
         return articleService.getAllArticles();
     }
 
-    @GetMapping(Endpoint.ARTICLE)
+    @GetMapping(Endpoint.UUID_VAR)
     public Article getArticle(@PathVariable(Endpoint.UUID) UUID uuid) {
         return articleService.getArticle(uuid);
     }
@@ -47,7 +47,7 @@ public class ArticleController {
         articleService.updateArticle(article);
     }
 
-    @DeleteMapping(Endpoint.ARTICLE)
+    @DeleteMapping(Endpoint.UUID_VAR)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteArticle(@PathVariable(Endpoint.UUID) UUID uuid) {
