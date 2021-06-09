@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.GET,
+                    .antMatchers(
                             Endpoint.ARTICLES,
                             Endpoint.UUID_VAR + "//**",
                             Endpoint.COMMENTS,

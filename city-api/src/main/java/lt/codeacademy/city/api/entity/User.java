@@ -1,5 +1,6 @@
 package lt.codeacademy.city.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).{6,}$")
     private String password;
 
+    @JsonIgnore
     @ManyToMany
     private Set<Role> roles = new HashSet<>();
 

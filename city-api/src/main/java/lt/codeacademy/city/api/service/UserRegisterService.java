@@ -45,6 +45,10 @@ public class UserRegisterService {
 
     public void updateUser(User user) {
         try {
+            String encodedPassword = passwordEncoder.encode(user.getPassword()).trim();
+            user.setPassword(encodedPassword);
+            Role role = roleRepository.findByName("USER").orElseThrow(RoleFoundExeption::new);
+            user.addRole(role);
             userRepository.save(user);
         } catch (IllegalArgumentException e) {
             log.error("Cannot create User {}", user);
