@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,7 +53,7 @@ public class ArticleController {
         articleService.deleteArticle(uuid);
     }
 
-//    @PostMapping
+    //    @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public void saveArticleWithImage(@RequestParam MultipartFile multipartFile,
 //                                     @RequestParam String name,
@@ -63,12 +62,12 @@ public class ArticleController {
 //        articleService.saveNewArticle(multipartFile, name, description, content);
 //    }
 //
-//    @PostMapping("/upload")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void saveImagenFileSystem(@RequestParam MultipartFile multipartFile,
-//                                     @RequestParam String name,
-//                                     @RequestParam String description,
-//                                     @RequestParam String content) {
-//        articleService.saveImageInFileSystem(multipartFile);
-//    }
+    @PostMapping("/upload")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveImageInFileSystem(@RequestParam MultipartFile image) {
+
+
+        articleService.saveImageInFileSystem(image);
+
+    }
 }

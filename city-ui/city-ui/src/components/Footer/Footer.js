@@ -10,7 +10,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                City
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -32,8 +32,7 @@ export default () =>  {
 
     return (
             <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                    <Typography variant="body1">City footer</Typography>
+                <Container maxWidth="sm" align="center">
                     <Copyright />
                 </Container>
             </footer>

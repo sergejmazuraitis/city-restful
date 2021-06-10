@@ -47,8 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers(
-                            Endpoint.ARTICLES,
-                            Endpoint.UUID_VAR + "//**",
+                            Endpoint.ARTICLES + "/**",
+                            Endpoint.UUID_VAR + "/**",
                             Endpoint.COMMENTS,
                             Endpoint.USER).permitAll()
                     .anyRequest().authenticated()

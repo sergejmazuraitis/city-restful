@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
-    CircularProgress,
+    CircularProgress, IconButton,
     Paper,
     Table,
     TableBody,
@@ -19,6 +19,8 @@ import * as Yup from "yup";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import {fetchArticleById} from "../../api/articlesApi";
 import {useSelector} from "react-redux";
+import {AccountCircle} from "@material-ui/icons";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const validationSchema = Yup.object().shape({
     content: Yup.string()
@@ -118,11 +120,15 @@ const CommentsPage = () => {
                                                         {comment.content}
                                                     </TableCell>
                                                     <TableCell align="right">
-                                                        <Button onClick={() => deleteComment(comment)}
-                                                                variant="outlined" color="primary">Delete</Button>
-                                                        <span>{comment.commentId}</span>
-                                                        <Button onClick={() => scrollToElement("cont")}
-                                                                variant="outlined" color="primary">Change</Button>
+                                                        <IconButton
+                                                            aria-label="delete-comment"
+                                                            aria-controls="menu-appbar"
+                                                            aria-haspopup="true"
+                                                            onClick={() => deleteComment(comment)}
+                                                            color="inherit"
+                                                        >
+                                                            <DeleteIcon />
+                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             ))}
