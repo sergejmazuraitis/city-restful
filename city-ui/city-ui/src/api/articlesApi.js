@@ -12,10 +12,13 @@ const addNewArticleWithImage = (newArticle) => {
 
     let formData = new FormData();
     formData.append('image', newArticle.image)
+    formData.set('name', newArticle.name)
+    formData.set('description', newArticle.description)
+    formData.set('content', newArticle.content)
 
-    return HTTP.post('/articles/upload',
-        formData
-    )
+    console.log(formData.get('image'))
+
+    return HTTP.post('/articles/upload', formData)
 }
 
 const deleteArticleById = (id) => HTTP.delete('/articles/' + id)

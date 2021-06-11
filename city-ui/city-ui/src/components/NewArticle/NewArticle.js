@@ -51,9 +51,12 @@ export default () => (
                                 </div>
 
                                 <div>
-                                    <FormikInput  name="image"  type="file"/>
-                                </div>
+                                    <input id="file" name="image" type="file" onChange={(event) => {
 
+                                        props.setFieldValue("image", event.currentTarget.files[0]);
+
+                                    }} className="form-control" />
+                                </div>
 
                                 {!props.isSubmitting ?
                                     <Button variant="contained" color="primary" type="submit">Submit</Button>

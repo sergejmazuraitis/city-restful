@@ -40,4 +40,7 @@ public class Article {
 
     @CreationTimestamp
     private LocalDateTime timestamp = LocalDateTime.now();
+
+    @Column(columnDefinition = "CLOB")
+    private String image;
 }

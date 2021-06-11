@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -66,18 +67,13 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
-    public void saveNewArticle(MultipartFile multipartFile, String name, String description, String content) throws IOException {
+    public void saveNewArticle(MultipartFile image, String name, String description, String content) throws IOException {
         Article article = new Article();
-        Image image = new Image();
-        image.setFileName(multipartFile.getName());
-        image.setMediaType(multipartFile.getContentType());
-//        image.setBytes(multipartFile.getBytes());
-        image.setSize(multipartFile.getSize());
-
+        String imageBase64 = new String(Base64.getEncoder().encodeToString(image.getBytes()));
         article.setName(name);
         article.setDescription(description);
         article.setContent(content);
-//        article.setImage(image);
+        article.setImage(imageBase64);
 
         articleRepository.save(article);
     }
