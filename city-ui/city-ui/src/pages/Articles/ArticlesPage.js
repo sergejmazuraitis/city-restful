@@ -11,6 +11,7 @@ import {fetchArticles} from "../../api/articlesApi";
 import {NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import {CircularProgress} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Album() {
+    const {t} = useTranslation('mainPage')
     const classes = useStyles();
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
@@ -94,7 +96,7 @@ export default function Album() {
                                               className={classes.link}
                                               activeClassName={classes.active}
                                               component={NavLink}>
-                                            Read Article
+                                            {t('Read')}
                                         </Link>
                                     </CardActions>
                                 </Card>
