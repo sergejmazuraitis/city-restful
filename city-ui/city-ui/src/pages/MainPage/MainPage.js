@@ -1,17 +1,16 @@
 import {makeStyles} from "@material-ui/core/styles";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-material-ui-carousel'
-import {Container, Paper} from '@material-ui/core'
+import {Button, CircularProgress, Container, Paper} from '@material-ui/core'
 import download from "../../img/download.jpg";
-import bycicles from "../../img/bycicle.jpg";
-import city1 from "../../img/city1.jpg";
-import cityRoad from "../../img/city-road.jpg";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {fetchLast5Articles} from "../../api/articlesApi";
+import NewArticle from "../NewArticlePage/NewArticlePage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,28 +58,19 @@ const useStyles = makeStyles((theme) => ({
 const MainPage = (props) => {
     const classes = useStyles();
     const loginUser = useSelector(state => state.user.loginUser)
-    const {t} = useTranslation('header');
+    const {t} = useTranslation('mainPage');
+    const [articles, setArticles] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    let items = [
-        {
-            name: "Random Name #1",
-            description: "Probably the most random thing you have ever seen!",
-            title: "Pavadinimas 1",
-            image: city1
-        },
-        {
-            name: "Random Name #2",
-            description: "Hello World!",
-            title: "Pavadinimas 2",
-            image: bycicles
-        },
-        {
-            name: "Random Name #3",
-            description: "Hello World!",
-            title: "Pavadinimas 3",
-            image: cityRoad
-        },
-    ]
+    useEffect(() => {
+        fetchLast5Articles()
+            .then(({data}) => {
+                console.log(data)
+                setArticles(data)
+            }).finally(() => setLoading(false))
+
+    }, [])
+
 
     const [value, setValue] = React.useState('recents');
 
@@ -91,71 +81,87 @@ const MainPage = (props) => {
     return (
         <>
             <Container maxWidth={"sm"} style={{margin: "15px auto", textAlign: "center"}}>
-                <nav>
-
-                    <Link underline="none" variant="button" color="textPrimary" to="/articles"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
-                        {t('Articles')}
-                    </Link>
-
-                    <Link underline="none" variant="button" color="textPrimary" to="/ads"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
-                        Ads
-                    </Link>
-
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <Link underline="none" variant="button" color="textPrimary" to="/articles"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            {t('Articles')}
+                        </Link>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Link underline="none" variant="button" color="textPrimary" to="/ads"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            {t('Ads')}
+                        </Link>
+                    </Grid>
                     {
                         loginUser?.roles.includes("ADMIN") ?
-                            <Link variant="button" color="textPrimary" to="/new-article"
-                                  className={classes.link} activeClassName={classes.active} component={NavLink}>
-                                New Article
-                            </Link>
+                            <Grid item xs={12}>
+                                <Link underline="none" variant="button" color="textPrimary" to="/new-article"
+                                      className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                    {t('NewArticle')}
+                                </Link>
+                            </Grid>
+
                             :
                             ""
                     }
 
-                </nav>
-
+                </Grid>
             </Container>
 
-            {/*<Carousel>*/}
-            {/*    {*/}
-            {/*        items.map((item, i) => <Item key={i} item={item}/>)*/}
-            {/*    }*/}
-            {/*</Carousel>*/}
+            {loading ? (
+                <div style={{
+                    margin: "auto"
+                }}>
+                    <CircularProgress/>
+                </div>
+                ) :
+                <>
+                    <Carousel>
+                    {
+                        articles.map((item, i) => <Item key={i} item={item}/>)
+                    }
+                </Carousel>
+                </>
+
+            }
 
         </>
     )
 }
 
-const Item = (props) => {
+const Item = (props) =>
+{
     const classes = useStyles();
+    const {t} = useTranslation('mainPage');
 
     return (
-        // <Paper>
-        //     <h2>{props.item.name}</h2>
-        //     <p>{props.item.description}</p>
-        //
-        //     <Button className="CheckButton">
-        //         Check it out!
-        //     </Button>
-        // </Paper>
 
         <Container>
-            <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${props.item.image})`}}>
+            <Paper className={classes.mainFeaturedPost}
+                   style={{
+                       backgroundImage: `url("data:image/jpg;base64, ${props.item.image}")`
+                   }}>
                 {/* Increase the priority of the hero background image */}
-                {<img style={{display: 'none'}} src={props.item.image}/>}
+                {<img style={{display: 'none'}} src={"data:image/jpg;base64, " + props.item.image}/>}
                 <div className={classes.overlay}/>
                 <Grid container>
                     <Grid item md={6}>
                         <div className={classes.mainFeaturedPostContent}>
                             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                                {props.item.title}
+                                {props.item.name}
                             </Typography>
                             <Typography variant="h5" color="inherit" paragraph>
                                 {props.item.description}
                             </Typography>
-                            <Link variant="subtitle1" href="#">
-                                Linkas
+                            <Link underline="none"
+                                variant="subtitle1"
+                                to={"/article/" + props.item.id}
+                                component={NavLink}>
+                                <Button variant="contained">
+                                    {t('Read')}
+                                </Button>
                             </Link>
                         </div>
                     </Grid>
