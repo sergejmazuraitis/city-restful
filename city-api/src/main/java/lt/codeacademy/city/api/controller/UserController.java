@@ -4,6 +4,7 @@ import lt.codeacademy.city.api.Endpoint;
 import lt.codeacademy.city.api.entity.User;
 import lt.codeacademy.city.api.service.UserRegisterService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,11 +32,13 @@ public class UserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void updateUser(@Valid @RequestBody User user) {
         userService.updateUser(user);
     }
 
     @DeleteMapping(Endpoint.UUID_VAR)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void deleteUser(@PathVariable(Endpoint.UUID) UUID uuid){
         userService.deleteUser(uuid);
     }
