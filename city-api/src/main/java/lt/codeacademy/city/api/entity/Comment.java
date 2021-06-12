@@ -40,4 +40,9 @@ public class Comment {
 
     @Type(type = "uuid-char")
     private UUID userId;
+
+    @NotNull
+    @Size(min = 1,
+            max = 250)
+    private String username;
 }
