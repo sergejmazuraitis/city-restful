@@ -74,4 +74,9 @@ public class ArticleController {
         articleService.saveImageInFileSystem(image);
 
     }
+
+    @GetMapping("/last")
+    public List<Article> getLast5Articles() {
+        return articleService.gelLast5Articles();
+    }
 }

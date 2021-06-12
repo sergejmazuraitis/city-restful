@@ -51,6 +51,10 @@ public class ArticleService {
         }
     }
 
+    public List<Article> gelLast5Articles() {
+        return articleRepository.findFirst5ByOrderByTimestampDesc();
+    }
+
     public Article getArticle(UUID id) {
         return articleRepository.findById(id).orElseThrow(() -> new ArticleNotFoundException(id.toString()));
     }
