@@ -2,10 +2,11 @@ import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import {userRegister} from "../../api/userRegisterApi";
 import Container from "@material-ui/core/Container";
-import {Paper} from "@material-ui/core";
+import {Paper, Typography} from "@material-ui/core";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import Button from "@material-ui/core/Button";
 import {useHistory, useLocation} from "react-router-dom";
+import React from "react";
 
 
 const validationSchema = Yup.object().shape({
@@ -59,9 +60,16 @@ const UserRegistration = () => {
             {
                 props => (
                     <>
-                        <Container maxWidth={"sm"}>
-                            <Paper elevation={3}>
-                                <Form style={{margin: 20}}>
+                        <Container maxWidth={"sm"} style={{margin: "auto"}}>
+                            <Paper elevation={3} style={{margin: "auto", padding: "20px 0"}}>
+                                <Form style={{margin: "15px 40px", textAlign: "center"}}>
+                                    <Typography color="textPrimary"
+                                                align="center"
+                                                variant="h4"
+                                                paragraph
+                                    >
+                                        Registration
+                                    </Typography>
                                     <div>
                                         <FormikInput name="name"
                                                      label="Name"
@@ -110,7 +118,14 @@ const UserRegistration = () => {
                                     </div>
 
                                     {!props.isSubmitting ?
-                                        <Button variant="contained" color="primary" type="submit">Submit</Button>
+                                        <Button variant="outlined"
+                                                type="submit"
+                                                style={{
+                                                    marginTop: "10px"
+                                                }}
+                                                disabled={props.isSubmitting}>
+                                            Submit
+                                        </Button>
                                         :
                                         <span>Submitting...</span>}
                                 </Form>

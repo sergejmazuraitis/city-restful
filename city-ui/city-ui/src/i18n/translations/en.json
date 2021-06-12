@@ -1,8 +1,42 @@
 {
+  "oftenUse": {
+    "Submit": "Submit",
+    "Submitting": "Submitting...",
+    "Comments": "Comments"
+  },
   "header": {
+    "Login": "Login",
+    "Logout": "Logout",
+    "Hello": "Hello,",
+    "MyAccount": "My Account",
+    "City": "City"
+  },
+  "login": {
+    "Login": "Log in",
+    "Username": "Username",
+    "Password": "Password",
+    "Registration": "Registration",
+    "NotReg": "Not registered yet?"
+  },
+  "mainPage": {
     "Articles": "Articles",
     "Ads": "Ads",
-    "Login/Registration": "Login/Registration",
-    "New Article": "New Article"
+    "NewArticle": "New Article",
+    "Read": "Read Article"
+  },
+  "article": {
+    "Comments": "Comments",
+    "ChangeArticle": "Change Article",
+    "DeleteArticle": "Delete Article"
+  },
+  "newArticle": {
+    "NewArticle": "New Article",
+    "ArticleName": "Article Name",
+    "Description": "Description",
+    "Content": "Content",
+    "ChooseFile": "Choose image",
+    "NoFileChosen": "No image chosen",
+    "Submit": "Submit",
+    "Submitting": "Submitting..."
   }
 }

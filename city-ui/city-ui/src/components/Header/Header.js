@@ -71,7 +71,7 @@ export default () => {
                           className={classes.toolbarTitle}
                           component={NavLink}
                     >
-                        City
+                        {t('City')}
                     </Link>
                     </nav>
                     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
@@ -112,7 +112,7 @@ export default () => {
                                                         color="textSecondary"
                                                         align="center"
                                                         gutterBottom>
-                                                Sveiki, {loginUser.username}
+                                                {t('Hello')} {loginUser.username}
                                             </Typography>
                                             <MenuItem onClick={handleClose} align="center">
                                                 <Button variant="button"
@@ -121,7 +121,7 @@ export default () => {
                                                         to="/account"
                                                         className={classes.link} activeClassName={classes.active}
                                                         component={NavLink}>
-                                                    My Account
+                                                    {t('MyAccount')}
                                                 </Button>
 
                                             </MenuItem>
@@ -135,26 +135,18 @@ export default () => {
                                                         className={classes.link}
                                                         activeClassName={classes.active}
                                                 >
-                                                    Logout
+                                                    {t('Logout')}
                                                 </Button>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}
-                                                      className={classes.center}>
-                                                <Button variant="button"
-                                                        align="center"
-                                                        color="textPrimary"
-                                                        className={classes.link}
-                                                        activeClassName={classes.active}
-                                                >
-                                                    Manage
-                                                </Button>
-
                                             </MenuItem>
                                         </>
                                         :
                                         <MenuItem onClick={handleClose}>
-                                            <Button color="primary" to="/login" variant="contained" component={NavLink}>
-                                                Login
+                                            <Button variant="button"
+                                                    align="center"
+                                                    color="textPrimary"
+                                                    to="/login"
+                                                    component={NavLink}>
+                                                {t('Login')}
                                             </Button>
                                         </MenuItem>
                                     }

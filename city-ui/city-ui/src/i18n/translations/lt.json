@@ -1,8 +1,42 @@
 {
+  "oftenUse": {
+    "Submit": "Pateikti",
+    "Submitting": "Pateikimas...",
+    "Comments": "Komentarai"
+  },
   "header": {
+    "Login": "Prisijungti",
+    "Logout": "Atsijungti",
+    "Hello": "Labas,",
+    "MyAccount": "Mano Paskira",
+    "City": "Miestas"
+  },
+  "login": {
+    "Login": "Prisijungti",
+    "Username": "Vartotojo Vardas",
+    "Password": "Slaptažodis",
+    "Registration": "Registruotis",
+    "NotReg": "Dar neturite paskyros?"
+  },
+  "mainPage": {
     "Articles": "Straipsniai",
     "Ads": "Skelbimai",
-    "Login/Registration": "Prisijungimas/Registracija",
-    "New Article": "Naujas Straipsnis"
+    "NewArticle": "Naujas Straipsnis",
+    "Read": "Skaityti Straipsnį"
+  },
+  "article": {
+    "Comments": "Komentarai",
+    "ChangeArticle": "Keisti Straipsnį",
+    "DeleteArticle": "Trinti Straipsnį"
+  },
+  "newArticle": {
+    "NewArticle": "Naujas Straipsnis",
+    "ArticleName": "Straipsnio Pavadinimas",
+    "Description": "Santrauka",
+    "Content": "Turinys",
+    "ChooseFile": "Pasirinkite nuotrauką",
+    "NoFileChosen": "Nuotrauka vis dar nepasirnkta",
+    "Submit": "Pateikti",
+    "Submitting": "Pateikimas..."
   }
 }

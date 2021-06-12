@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
-    CircularProgress, IconButton,
+    CircularProgress,
+    IconButton,
     Paper,
     Table,
     TableBody,
@@ -19,8 +20,9 @@ import * as Yup from "yup";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import {fetchArticleById} from "../../api/articlesApi";
 import {useSelector} from "react-redux";
-import {AccountCircle} from "@material-ui/icons";
 import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from "@material-ui/core/Typography";
+import {useTranslation} from "react-i18next";
 
 const validationSchema = Yup.object().shape({
     content: Yup.string()
@@ -30,31 +32,35 @@ const validationSchema = Yup.object().shape({
 const useStyle = makeStyles({
     table: {
         minWidth: 150,
-    }
+    },
+    title: {
+        fontSize: 12,
+    },
+
 })
 const CommentsPage = () => {
 
     const {id} = useParams();
+    const {t} = useTranslation('oftenUse');
     const userId = useSelector(state => state.user.loginUser?.id);
-    const [comments, setComments] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [article, setArticle] = useState({})
+    const username = useSelector(state => state.user.loginUser?.username);;
+    const user = useSelector(state => state.user);
+    const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [article, setArticle] = useState({});
     const initialValues = {
         content: '',
         articleId: id,
-        userId: userId
-    }
-    const scrollToElement = (elemId) => {
-        document.getElementById(elemId).scrollIntoView();
-    }
-
+        userId,
+        username
+    };
     useEffect(() => {
         fetchArticleById(id)
             .then(({data}) => {
                 setArticle(data)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, []);
 
     useEffect(() => {
         // componentDidMount && componentDidUpdate
@@ -62,7 +68,7 @@ const CommentsPage = () => {
             .then(({data}) => {
                 setComments(data)
             }).finally(() => setLoading(false))
-    }, [])
+    }, []);
 
     const postComment = (postData, {setSubmitting, resetForm}) => {
         setSubmitting(true)
@@ -78,10 +84,9 @@ const CommentsPage = () => {
             .finally(() => {
                 setSubmitting(false)
             })
-    }
+    };
 
     const deleteComment = (comment) => {
-
         deleteCommentById(comment.commentId)
             .finally(
                 setComments(comments.filter(com => com.commentId !== comment.commentId))
@@ -97,13 +102,17 @@ const CommentsPage = () => {
         >
             {props => (
                 <>
-                    <Container maxWidth="md">
+                    <Container maxWidth="md" style={{margin: "auto"}}>
                         <TableContainer component={Paper} className={classes.table}>
                             <Form style={{margin: 20}}>
                                 <Table aria-label="simple table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Comments</TableCell>
+                                            <TableCell>
+                                                <Typography variant="h4" paragraph>
+                                                    {t('Comments')}
+                                                </Typography>
+                                            </TableCell>
                                             <TableCell></TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -117,41 +126,63 @@ const CommentsPage = () => {
                                             comments.map(comment => (
                                                 <TableRow key={comment.commentId}>
                                                     <TableCell align="left" component="th" scope="row">
-                                                        {comment.content}
+                                                        <div>
+                                                            <Typography variant="h5" component="h2">
+                                                                {comment.username}
+                                                            </Typography>
+                                                        </div>
+                                                        <div>{comment.content}</div>
+                                                        <div>
+                                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                                                {comment.timestamp}
+                                                            </Typography>
+                                                        </div>
+
                                                     </TableCell>
                                                     <TableCell align="right">
-                                                        <IconButton
-                                                            aria-label="delete-comment"
-                                                            aria-controls="menu-appbar"
-                                                            aria-haspopup="true"
-                                                            onClick={() => deleteComment(comment)}
-                                                            color="inherit"
-                                                        >
-                                                            <DeleteIcon />
-                                                        </IconButton>
+                                                        { comment.userId === userId || user.loginUser?.roles.includes("ADMIN") ?
+                                                            <IconButton
+                                                                aria-label="delete-comment"
+                                                                aria-controls="menu-appbar"
+                                                                aria-haspopup="true"
+                                                                onClick={() => deleteComment(comment)}
+                                                                color="inherit"
+                                                            >
+                                                                <DeleteIcon/>
+                                                            </IconButton>
+                                                            :
+                                                            ''
+                                                        }
                                                     </TableCell>
                                                 </TableRow>
                                             ))}
+                                        {user.loginUser ?
 
-                                        <TableRow>
-                                            <TableCell>
-                                                <FormikInput
-                                                    id="cont"
-                                                    name="content"
-                                                    label="Content"
-                                                    defaultValue="Content"
-                                                    multiline rows={5}
-                                                    error={props.touched.content && !!props.errors.content}/>
-                                            </TableCell>
-                                            <TableCell>
-                                                {!props.isSubmitting ?
-                                                    <Button variant="contained" color="primary"
-                                                            type="submit">Submit</Button>
-                                                    :
-                                                    <span>Submitting...</span>}
+                                            <TableRow>
+                                                <TableCell>
+                                                    <FormikInput
+                                                        id="cont"
+                                                        name="content"
+                                                        label="Content"
+                                                        defaultValue="Content"
+                                                        multiline rows={5}
+                                                        error={props.touched.content && !!props.errors.content}/>
+                                                </TableCell>
+                                                <TableCell>
+                                                    {!props.isSubmitting ?
+                                                        <Button variant="outlined"
+                                                                type="submit"
+                                                                disabled={props.isSubmitting}>
+                                                            {t('Submit')}
+                                                        </Button>
+                                                        :
+                                                        <span>{t('Submitting')}</span>}
 
-                                            </TableCell>
-                                        </TableRow>
+                                                </TableCell>
+                                            </TableRow>
+                                            :
+                                            ''
+                                        }
                                     </TableBody>
                                 </Table>
                             </Form>

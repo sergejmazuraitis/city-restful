@@ -95,10 +95,10 @@ const NewArticlePage = () => {
                                                className="form-control"/>
                                         <Button variant="outlined"
                                                 onClick={() => FileUpload()}>
-                                            Chosse file here
+                                            {t('ChooseFile')}
                                         </Button>
                                         {!imageName ?
-                                            <span>No file chosen, yet</span>
+                                            <span>{t('NoFileChosen')}</span>
                                             :
                                             <span>{imageName}</span>
                                         }
@@ -111,10 +111,10 @@ const NewArticlePage = () => {
                                                     marginTop: "10px"
                                                 }}
                                                 disabled={props.isSubmitting}>
-                                            Submit
+                                            {t('Submit')}
                                         </Button>
                                         :
-                                        <span>Submitting...</span>}
+                                        <span>{t('Submitting')}</span>}
                                 </Form>
                             </Paper>
                         </Container>

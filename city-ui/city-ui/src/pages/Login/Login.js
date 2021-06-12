@@ -11,6 +11,7 @@ import {NavLink, useHistory, useLocation} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,13 +29,15 @@ const validationSchema = Yup.object().shape({
         .required(),
     password: Yup.string()
         .required()
-})
+});
+
 const Login = () => {
 
+    const {t} = useTranslation('login');
     const classes = useStyles();
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const location = useLocation()
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
 
     const postLogin = (loginData, {setSubmitting}) => {
         setSubmitting(true)
@@ -52,7 +55,7 @@ const Login = () => {
                 history.push('/')
             })
             .finally(() => setSubmitting(false))
-    }
+    };
 
     return (
         <Formik initialValues={{
@@ -65,60 +68,60 @@ const Login = () => {
                 <>
                     <Container maxWidth={"sm"} style={{margin: "auto"}}>
                         <Paper elevation={3} style={{margin: "auto", padding: "20px 0"}}>
-
                             <Form style={{margin: "15px 40px", textAlign: "center"}}>
                                 <Typography color="textPrimary"
                                             align="center"
+                                            variant="h4"
+                                            paragraph
                                 >
-                                    Log in
+                                    {t('Login')}
                                 </Typography>
                                 <div>
                                     <FormikInput name="username"
-                                                 label="Username"
+                                                 label={t("Username")}
                                                  error={props.touched.loginName && !!props.errors.loginName}
-                                                 placeholder="Username"/>
+                                                 placeholder={t("Username")}/>
                                 </div>
                                 <div>
                                     <FormikInput name="password"
-                                                 label="Password"
+                                                 label={t("Password")}
                                                  error={props.touched.loginPassword && !!props.errors.loginPassword}
-                                                 placeholder="Password"
+                                                 placeholder={t("Password")}
                                                  type="password"/>
                                 </div>
                                 {!props.isSubmitting ?
-                                    <Button type="submit"
-                                            disabled={props.isSubmitting}
-                                            style={{
-                                                marginTop: "5px",
-                                                borderRadius: "5px",
-                                                border: "1px solid",
-                                                borderColor: "#bababa",
-                                                width: "30%"
-                                            }}>Log in</Button>
-                                    :
-                                    <span>Submitting...</span>}
-                            </Form>
-                            {!props.isSubmitting ?
-                                <>
-                                    <Typography color="textSecondary"
-                                                align="center"
-                                                gutterBottom
-                                    >
-                                        Not registered yet?
-                                        <Link underline="none"
-                                              variant="button"
-                                              color="textPrimary"
-                                              to="/register"
-                                              className={classes.link}
-                                              activeClassName={classes.active}
-                                              component={NavLink}>
-                                            Registration
-                                        </Link>
-                                    </Typography>
+                                    <>
+                                        <Button type="submit"
+                                                disabled={props.isSubmitting}
+                                                style={{
+                                                    marginTop: "5px",
+                                                    borderRadius: "5px",
+                                                    border: "1px solid",
+                                                    borderColor: "#bababa",
+                                                    width: "30%"
+                                                }}>{t('Login')}</Button>
+                                        <div style={{marginTop: '20px'}}>
+                                            <Typography color="textSecondary"
+                                                        align="center"
+                                                        gutterBottom
+                                            >
+                                                {t('NotReg')}
+                                                <Link underline="none"
+                                                      variant="button"
+                                                      color="textPrimary"
+                                                      to="/register"
+                                                      className={classes.link}
+                                                      activeClassName={classes.active}
+                                                      component={NavLink}>
+                                                    {t('Registration')}
+                                                </Link>
+                                            </Typography>
+                                        </div>
+                                    </>
 
-                                </>
-                                :
-                                <span>Submitting...</span>}
+                                    :
+                                    <span>{t('Submitting')}</span>}
+                            </Form>
                         </Paper>
                     </Container>
                 </>
