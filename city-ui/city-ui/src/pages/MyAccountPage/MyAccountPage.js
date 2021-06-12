@@ -1,4 +1,4 @@
-import {getUserById, deleteUserById, updateUser} from '../../api/userRegisterApi'
+import {deleteUserById, getUserById} from '../../api/userRegisterApi'
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -38,7 +38,7 @@ const MyAccountPage = () => {
     const deleteUser = (id) => {
         console.log("deleting")
         deleteUserById(id)
-        window.location.href="/"
+        window.location.href = "/"
     }
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const MyAccountPage = () => {
     }, [])
 
     return loading ? (<CircularProgress/>) :
-        (<Container>
+        (<Container maxWidth={"sm"} style={{margin: "auto"}}>
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -75,10 +75,9 @@ const MyAccountPage = () => {
                     </CardContent>
                     <CardActions>
                         <Button onClick={() => deleteUser(userId)} size="small">Delete account</Button>
-                        <Button to={"/user/" + userId} size="small">Change account</Button>
-                        <Link variant="button" color="textPrimary" to={"/user/" + userId}
+                        <Link underline="none" variant="button" color="textPrimary" to={"/user/" + userId}
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Change User
+                            <Button size="small">Change Account</Button>
                         </Link>
 
                     </CardActions>

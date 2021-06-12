@@ -133,7 +133,14 @@ const ChangeUserPage = () => {
                                     </div>
 
                                     {!props.isSubmitting ?
-                                        <Button variant="contained" color="primary" type="submit">Submit</Button>
+                                        <Button variant="contained"
+                                                type="submit"
+                                                style={{
+                                                    marginTop: "10px"
+                                                }}
+                                                disabled={props.isSubmitting}>
+                                            Submit
+                                        </Button>
                                         :
                                         <span>Submitting...</span>}
                                 </Form>

@@ -57,7 +57,14 @@ export default function Album() {
 
     }, [])
 
-    return loading ? (<CircularProgress/>) :
+    return loading ? (
+            <div style={{
+                margin: "auto"
+            }}>
+                <CircularProgress/>
+            </div>
+        )
+        :
         (
             <>
                 <Container className={classes.cardGrid} maxWidth="md">
@@ -68,10 +75,11 @@ export default function Album() {
                                     <CardMedia
                                         className={classes.cardMedia}
                                         image={"data:image/jpg;base64, " + article.image}
-                                        title="Image title"
+                                        title={article.name}
                                     />
                                     <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                        <Typography gutterBottom variant="h5"
+                                                    component="h2">
                                             {article.name}
                                         </Typography>
                                         <Typography>
@@ -79,8 +87,12 @@ export default function Album() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Link variant="button" color="textPrimary" to={"/article/" + article.id}
-                                              className={classes.link} activeClassName={classes.active}
+                                        <Link underline="none"
+                                              variant="button"
+                                              color="textPrimary"
+                                              to={"/article/" + article.id}
+                                              className={classes.link}
+                                              activeClassName={classes.active}
                                               component={NavLink}>
                                             Read Article
                                         </Link>
