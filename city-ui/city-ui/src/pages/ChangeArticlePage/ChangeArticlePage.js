@@ -58,7 +58,13 @@ const ChangeArticlePage = () => {
         document.getElementById('file').click();
     };
 
-    return loading ? (<CircularProgress/>) :
+    return loading ? (
+            <div style={{
+                margin: "auto"
+            }}>
+                <CircularProgress/>
+            </div>)
+        :
 
         (<Formik initialValues={initialValues}
                  enableReinitialize

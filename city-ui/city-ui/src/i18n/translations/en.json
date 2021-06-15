@@ -40,6 +40,7 @@
     "Submitting": "Submitting..."
   },
   "register": {
+    "ChangeAccount": "Change Account",
     "Registration": "Registration",
     "Name": "Name",
     "Lastname": "Last Name",
@@ -64,6 +65,6 @@
   "myAccount": {
     "YourAccount": "Your Account",
     "DeleteAccount": "Delete Account",
-    "ChangeAccount": "Chamge Account"
+    "ChangeAccount": "Change Account"
   }
 }

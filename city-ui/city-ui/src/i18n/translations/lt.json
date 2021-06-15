@@ -40,6 +40,7 @@
     "Submitting": "Pateikimas..."
   },
   "register": {
+    "ChangeAccount": "Keisti paskirą",
     "Registration": "Registracija",
     "Name": "Vardas",
     "Lastname": "Pavardė",
