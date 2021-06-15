@@ -38,5 +38,18 @@
     "NoFileChosen": "Nuotrauka vis dar nepasirnkta",
     "Submit": "Pateikti",
     "Submitting": "Pateikimas..."
+  },
+  "register": {
+    "Registration": "Registracija",
+    "Name": "Vardas",
+    "Lastname": "Pavardė",
+    "Username": "Vartotojo vardas",
+    "Email": "Elektroninis paštas",
+    "Phone": "Telefono numeris",
+    "Password": "Slaptažodis",
+    "PasswordConfirm": "Slaptažodžio patvirtinimas",
+    "Submit": "Pateikti",
+    "Submitting": "Pateikimas..."
   }
+
 }

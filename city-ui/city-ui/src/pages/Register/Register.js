@@ -7,6 +7,7 @@ import FormikInput from "../../components/FormikInput/FormikInput";
 import Button from "@material-ui/core/Button";
 import {useHistory, useLocation} from "react-router-dom";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 
 const validationSchema = Yup.object().shape({
@@ -27,36 +28,34 @@ const validationSchema = Yup.object().shape({
 })
 
 const UserRegistration = () => {
-    // const {t} = useTranslation('register');
+    const {t} = useTranslation('register');
 
-    const history = useHistory()
-    const location = useLocation()
+    const history = useHistory();
+    const location = useLocation();
+    const initialValues = {
+        name: '',
+        surname: '',
+        phone: '',
+        email: '',
+        password: '',
+        username: '',
+        roles: ["USER"]
+    };
     const postNewUser = (userData, {setSubmitting}) => {
         setSubmitting(true)
         userRegister(userData)
             .then(() => {
                 const from = location.state?.from
-
                 history.push(from || '/')
             })
-
             .finally(() => setSubmitting(false))
 
-    }
+    };
     return (
 
-        <Formik initialValues={{
-            name: '',
-            surname: '',
-            phone: '',
-            email: '',
-            password: '',
-            username: '',
-            roles: ["USER"]
-        }}
+        <Formik initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={postNewUser}>
-
             {
                 props => (
                     <>
@@ -68,52 +67,52 @@ const UserRegistration = () => {
                                                 variant="h4"
                                                 paragraph
                                     >
-                                        Registration
+                                        {t("Registration")}
                                     </Typography>
                                     <div>
                                         <FormikInput name="name"
-                                                     label="Name"
+                                                     label={t("Name")}
                                                      error={props.touched.name && !!props.errors.name}
-                                                     placeholder="Name"/>
+                                                     placeholder={t("Name")}/>
                                     </div>
                                     <div>
                                         <FormikInput name="surname"
-                                                     label="LastName"
+                                                     label={t("Lastname")}
                                                      error={props.touched.surname && !!props.errors.surname}
-                                                     placeholder="LastName"/>
+                                                     placeholder={t("Lastname")}/>
                                     </div>
                                     <div>
                                         <FormikInput name="username"
-                                                     label="Username"
+                                                     label={t("Username")}
                                                      error={props.touched.surname && !!props.errors.surname}
-                                                     placeholder="username"/>
+                                                     placeholder={t("Username")}/>
                                     </div>
 
                                     <div>
                                         <FormikInput name="email"
-                                                     label="Email"
+                                                     label={t("Email")}
                                                      error={props.touched.email && !!props.errors.email}
-                                                     placeholder="Email"/>
+                                                     placeholder={t("Email")}/>
                                     </div>
                                     <div>
                                         <FormikInput name="phone"
-                                                     label="Phone Number"
+                                                     label={t("Phone")}
                                                      error={props.touched.email && !!props.errors.email}
-                                                     placeholder="Phone Number"/>
+                                                     placeholder={t("Phone")}/>
                                     </div>
 
                                     <div>
                                         <FormikInput name="password"
-                                                     label="Password"
+                                                     label={t("Password")}
                                                      error={props.touched.password && !!props.errors.password}
-                                                     placeholder="Password"
+                                                     placeholder={t("Password")}
                                                      type="password"/>
                                     </div>
                                     <div>
                                         <FormikInput name="repeatPassword"
-                                                     label="Password Confirm"
+                                                     label={t("PasswordConfirm")}
                                                      error={props.touched.repeatPassword && !!props.errors.repeatPassword}
-                                                     placeholder="Password Confirm"
+                                                     placeholder={t("PasswordConfirm")}
                                                      type="password"/>
                                     </div>
 
@@ -124,10 +123,10 @@ const UserRegistration = () => {
                                                     marginTop: "10px"
                                                 }}
                                                 disabled={props.isSubmitting}>
-                                            Submit
+                                            {t('Submit')}
                                         </Button>
                                         :
-                                        <span>Submitting...</span>}
+                                        <span>{t('Submitting')}</span>}
                                 </Form>
                             </Paper>
                         </Container>

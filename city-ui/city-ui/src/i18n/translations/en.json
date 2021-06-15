@@ -38,5 +38,17 @@
     "NoFileChosen": "No image chosen",
     "Submit": "Submit",
     "Submitting": "Submitting..."
+  },
+  "register": {
+    "Registration": "Registration",
+    "Name": "Name",
+    "Lastname": "Last Name",
+    "Username": "Username",
+    "Email": "Email",
+    "Phone": "Phone Number",
+    "Password": "Password",
+    "PasswordConfirm": "Password Confirm",
+    "Submit": "Submit",
+    "Submitting": "Submitting..."
   }
 }
