@@ -43,8 +43,14 @@ public class ArticleController {
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateArticle(@Valid @RequestBody Article article) {
-        articleService.updateArticle(article);
+    public void updateArticle(@RequestParam MultipartFile image,
+                              @RequestParam String name,
+                              @RequestParam String description,
+                              @RequestParam String content,
+                              @RequestParam UUID uuid) throws IOException {
+
+        articleService.updateArticle(image, name, description, content, uuid);
+        articleService.saveImageInFileSystem(image);
     }
 
     @DeleteMapping(Endpoint.UUID_VAR)
@@ -65,6 +71,7 @@ public class ArticleController {
 //
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public void saveImageInFileSystem(@RequestParam MultipartFile image,
                                      @RequestParam String name,
                                      @RequestParam String description,

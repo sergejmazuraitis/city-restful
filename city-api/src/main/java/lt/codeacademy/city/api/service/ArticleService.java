@@ -59,12 +59,16 @@ public class ArticleService {
         return articleRepository.findById(id).orElseThrow(() -> new ArticleNotFoundException(id.toString()));
     }
 
-    public void updateArticle(Article article) {
-        try {
-            articleRepository.save(article);
-        }catch (IllegalArgumentException e) {
-            log.error("Cannot create article {}", article);
-        }
+    public void updateArticle(MultipartFile image, String name, String description, String content, UUID uuid) throws IOException {
+        Article article = new Article();
+        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
+        article.setId(uuid);
+        article.setName(name);
+        article.setDescription(description);
+        article.setContent(content);
+        article.setImage(imageBase64);
+
+        articleRepository.save(article);
     }
 
     public void deleteArticle(UUID id){
@@ -73,7 +77,7 @@ public class ArticleService {
 
     public void saveNewArticle(MultipartFile image, String name, String description, String content) throws IOException {
         Article article = new Article();
-        String imageBase64 = new String(Base64.getEncoder().encodeToString(image.getBytes()));
+        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
         article.setName(name);
         article.setDescription(description);
         article.setContent(content);
