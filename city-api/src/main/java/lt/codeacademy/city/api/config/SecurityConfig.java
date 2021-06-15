@@ -84,5 +84,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 PathRequest.toStaticResources().atCommonLocations())    //static files(css, js, images)
                 .antMatchers("/h2/**");    //h2 console
     }
-
 }
