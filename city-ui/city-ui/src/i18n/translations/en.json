@@ -60,5 +60,10 @@
     "ChoseImage": "Chose image",
     "Submit": "Submit",
     "Submitting": "Submitting..."
+  },
+  "myAccount": {
+    "YourAccount": "Your Account",
+    "DeleteAccount": "Delete Account",
+    "ChangeAccount": "Chamge Account"
   }
 }

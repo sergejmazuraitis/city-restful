@@ -60,5 +60,10 @@
     "ChoseImage": "Pasirinkite nuotrauką",
     "Submit": "Pateikti",
     "Submitting": "Pateikimas..."
+  },
+  "myAccount": {
+    "YourAccount": "Jūsu Paskira",
+    "DeleteAccount": "Trinti paskirą",
+    "ChangeAccount": "Keisti Paskirą"
   }
 }

@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {CircularProgress, Container} from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import {NavLink} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
     root: {
@@ -30,16 +31,17 @@ const useStyles = makeStyles({
 
 const MyAccountPage = () => {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-    const [user, setUser] = useState()
+    const {t} = useTranslation('myAccount');
+
+    const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
+
     const userId = useSelector(state => state.user.loginUser?.id)
-    const [loading, setLoading] = useState(true)
 
     const deleteUser = (id) => {
-        console.log("deleting")
         deleteUserById(id)
         window.location.href = "/"
-    }
+    };
 
     useEffect(() => {
         getUserById(userId)
@@ -47,14 +49,20 @@ const MyAccountPage = () => {
                 setUser(data)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, []);
 
-    return loading ? (<CircularProgress/>) :
+    return loading ? (
+            <div style={{
+                margin: "auto"
+            }}>
+                <CircularProgress/>
+            </div>)
+        :
         (<Container maxWidth={"sm"} style={{margin: "auto"}}>
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Your Account
+                            {t('YourAccount')}
                         </Typography>
                         <hr/>
                         <Typography className={classes.pos} color="textPrimary">
@@ -74,10 +82,10 @@ const MyAccountPage = () => {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button onClick={() => deleteUser(userId)} size="small">Delete account</Button>
+                        <Button onClick={() => deleteUser(userId)} size="small">{t('DeleteAccount')}</Button>
                         <Link underline="none" variant="button" color="textPrimary" to={"/user/" + userId}
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            <Button size="small">Change Account</Button>
+                            <Button size="small">{t('ChangeAccount')}</Button>
                         </Link>
 
                     </CardActions>
