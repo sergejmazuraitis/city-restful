@@ -7,6 +7,7 @@ import FormikInput from "../../components/FormikInput/FormikInput";
 import React, {useEffect, useState} from "react";
 import {fetchArticleById, updateArticle} from "../../api/articlesApi";
 import {useHistory, useParams} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -19,18 +20,20 @@ const validationSchema = Yup.object().shape({
 
 const ChangeArticlePage = () => {
     const {id} = useParams();
+    const {t} = useTranslation('changeArticle');
+    const history = useHistory();
+
     const [imageName, setImageName] = useState();
     const [article, setArticle] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const history = useHistory();
     const initialValues = {
         id: article.id,
         name: article.name,
         description: article.description,
         content: article.content,
-        image: article.image
-    }
+        image: new FormData
+    };
 
     useEffect(() => {
         fetchArticleById(id)
@@ -73,25 +76,22 @@ const ChangeArticlePage = () => {
                                                     variant="h4"
                                                     paragraph
                                         >
-                                            Change Article
+                                            {t('ChangeArticle')}
                                         </Typography>
 
                                         <div>
                                             <FormikInput name="name"
-                                                         label="Article Name"
-                                                         defaultValue='Article Name'
+                                                         label={t("ArticleName")}
                                                          error={props.touched.name && !!props.errors.name}/>
                                         </div>
                                         <div>
                                             <FormikInput name="description"
-                                                         label="Description"
-                                                         defaultValue='Description'
+                                                         label={t("Description")}
                                                          error={props.touched.description && !!props.errors.description}/>
                                         </div>
                                         <div>
                                             <FormikInput name="content"
-                                                         label="Content"
-                                                         defaultValue='Content'
+                                                         label={t("Content")}
                                                          multiline rows={10}
                                                          error={props.touched.content && !!props.errors.content}/>
                                         </div>
@@ -110,10 +110,10 @@ const ChangeArticlePage = () => {
                                                    className="form-control"/>
                                             <Button variant="outlined"
                                                     onClick={() => FileUpload()}>
-                                                Chose file
+                                                {t('ChoseImage')}
                                             </Button>
                                             {!imageName ?
-                                                <span>Choosed old image</span>
+                                                <span>{t('NoFileChosen')}</span>
                                                 :
                                                 <span>{imageName}</span>
                                             }
@@ -126,10 +126,10 @@ const ChangeArticlePage = () => {
                                                         marginTop: "10px"
                                                     }}
                                                     disabled={props.isSubmitting}>
-                                                Submit
+                                                {t('Submit')}
                                             </Button>
                                             :
-                                            <span>Submitting...</span>}
+                                            <span>{t('Submitting')}</span>}
                                     </Form>
                                 </Paper>
                             </Container>

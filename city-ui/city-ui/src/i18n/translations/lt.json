@@ -50,6 +50,15 @@
     "PasswordConfirm": "Slaptažodžio patvirtinimas",
     "Submit": "Pateikti",
     "Submitting": "Pateikimas..."
+  },
+  "changeArticle": {
+    "ChangeArticle": "Keisti Straipsnį",
+    "ArticleName": "Straipsnio Pavadinimas",
+    "Description": "Santrauka",
+    "Content": "Turinys",
+    "NoFileChosen": "Nuotrauka vis dar nepasirnkta",
+    "ChoseImage": "Pasirinkite nuotrauką",
+    "Submit": "Pateikti",
+    "Submitting": "Pateikimas..."
   }
-
 }

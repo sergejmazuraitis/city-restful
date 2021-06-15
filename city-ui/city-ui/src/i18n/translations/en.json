@@ -50,5 +50,15 @@
     "PasswordConfirm": "Password Confirm",
     "Submit": "Submit",
     "Submitting": "Submitting..."
+  },
+  "changeArticle": {
+    "ChangeArticle": "Change Article",
+    "ArticleName": "Article Name",
+    "Description": "Description",
+    "Content": "Content",
+    "NoFileChosen": "No image chosen",
+    "ChoseImage": "Chose image",
+    "Submit": "Submit",
+    "Submitting": "Submitting..."
   }
 }
