@@ -28,30 +28,24 @@ export default () => (
             <Route path="/register">
                 <Register/>
             </Route>
-            <Route path="/ads">
-                <Ads/>
-            </Route>
-            <Route path="/shop">
-                <Shop/>
-            </Route>
             <SecuredRoute path="/new-article" roles={["ADMIN"]}>
                 <NewArticlePage/>
             </SecuredRoute>
             <Route path="/article/:id">
                 <ArticlePage/>
             </Route>
-            <Route path="/change-article/:id">
+            <SecuredRoute path="/change-article/:id" roles={["ADMIN"]}>
                 <ChangeArticlePage/>
-            </Route>
+            </SecuredRoute>
             <Route path="/comments/:id">
                 <CommentsPage/>
             </Route>
-            <Route path="/account">
+            <SecuredRoute path="/account" roles={["ADMIN", "USER"]}>
                 <MyAccountPage/>
-            </Route>
-            <Route path="/user/:id">
+            </SecuredRoute>
+            <SecuredRoute path="/user/:id" roles={["ADMIN", "USER"]}>
                 <ChangeUserPage/>
-            </Route>
+            </SecuredRoute>
 
         </Switch>
     </>
