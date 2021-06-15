@@ -25,6 +25,26 @@ const addNewArticleWithImage = (newArticle) => {
 
 const deleteArticleById = (id) => HTTP.delete('/articles/' + id)
 
-const updateArticle = (article) => HTTP.put('/articles', article)
+const updateArticle = (articleData) => {
 
-export {fetchArticles, addNewArticle, fetchArticleById, deleteArticleById, updateArticle, addNewArticleWithImage, fetchLast5Articles}
+    let formDataUpdate = new FormData();
+    formDataUpdate.append('image', articleData.image)
+    formDataUpdate.set('name', articleData.name)
+    formDataUpdate.set('description', articleData.description)
+    formDataUpdate.set('content', articleData.content)
+    formDataUpdate.set('uuid', articleData.id)
+
+    console.log(formDataUpdate.get('image'))
+
+    return HTTP.put('/articles', formDataUpdate)
+}
+
+export {
+    fetchArticles,
+    addNewArticle,
+    fetchArticleById,
+    deleteArticleById,
+    updateArticle,
+    addNewArticleWithImage,
+    fetchLast5Articles
+}

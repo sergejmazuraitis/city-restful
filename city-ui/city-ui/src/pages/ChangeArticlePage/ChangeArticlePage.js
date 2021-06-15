@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import React, {useEffect, useState} from "react";
 import {fetchArticleById, updateArticle} from "../../api/articlesApi";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -18,10 +18,19 @@ const validationSchema = Yup.object().shape({
 })
 
 const ChangeArticlePage = () => {
-    const {id} = useParams()
+    const {id} = useParams();
+    const [imageName, setImageName] = useState();
+    const [article, setArticle] = useState({});
+    const [loading, setLoading] = useState(true);
 
-    const [article, setArticle] = useState({})
-    const [loading, setLoading] = useState(true)
+    const history = useHistory();
+    const initialValues = {
+        id: article.id,
+        name: article.name,
+        description: article.description,
+        content: article.content,
+        image: article.image
+    }
 
     useEffect(() => {
         fetchArticleById(id)
@@ -29,28 +38,26 @@ const ChangeArticlePage = () => {
                 setArticle(data)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, []);
 
-    const changeArticle = (article, {setSubmitting}) => {
+    const changeArticle = (article, {setSubmitting, resetForm}) => {
         setSubmitting(true)
 
         updateArticle(article)
             .then(() => {
-                console.log('changed')
+                resetForm(initialValues)
+                history.push('/articles');
             })
             .finally(() => setSubmitting(false))
-    }
+    };
 
+    const FileUpload = () => {
+        document.getElementById('file').click();
+    };
 
     return loading ? (<CircularProgress/>) :
 
-        (<Formik initialValues={{
-                id: article.id,
-                name: article.name,
-                description: article.description,
-                content: article.content,
-                image: article.image
-            }}
+        (<Formik initialValues={initialValues}
                  enableReinitialize
                  validationSchema={validationSchema}
                  onSubmit={changeArticle}
@@ -92,10 +99,24 @@ const ChangeArticlePage = () => {
                                             <input id="file"
                                                    name="image"
                                                    type="file"
+                                                   style={{
+                                                       display: "none"
+                                                   }}
                                                    onChange={(event) => {
+                                                       setImageName(event.currentTarget.files[0].name);
                                                        props.setFieldValue("image", event.currentTarget.files[0]);
+
                                                    }}
                                                    className="form-control"/>
+                                            <Button variant="outlined"
+                                                    onClick={() => FileUpload()}>
+                                                Chose file
+                                            </Button>
+                                            {!imageName ?
+                                                <span>Choosed old image</span>
+                                                :
+                                                <span>{imageName}</span>
+                                            }
                                         </div>
 
                                         {!props.isSubmitting ?
