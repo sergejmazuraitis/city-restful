@@ -4,12 +4,13 @@ import {IconButton, Menu, MenuItem, Toolbar} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory, useLocation} from "react-router-dom";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import {useTranslation} from "react-i18next";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import {AccountCircle} from "@material-ui/icons";
+import {logout} from "../../store/slices/userSllice";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -46,7 +47,17 @@ export default () => {
     const {t} = useTranslation('header');
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch()
     const open = Boolean(anchorEl);
+    const history = useHistory();
+    const location = useLocation();
+
+    const logoutOnClick = () => {
+        dispatch(logout())
+        const from = location.state?.from
+        console.log(from)
+        history.push(from || '/')
+    }
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
@@ -64,15 +75,15 @@ export default () => {
             <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
                     <nav>
-                    <Link color="inherit"
-                          underline="none"
-                          noWrap
-                          to="/"
-                          className={classes.toolbarTitle}
-                          component={NavLink}
-                    >
-                        {t('City')}
-                    </Link>
+                        <Link color="inherit"
+                              underline="none"
+                              noWrap
+                              to="/"
+                              className={classes.toolbarTitle}
+                              component={NavLink}
+                        >
+                            {t('City')}
+                        </Link>
                     </nav>
                     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
 
@@ -130,7 +141,7 @@ export default () => {
                                                         align="center"
                                                         color="textPrimary"
                                                         onClick={() => {
-                                                            window.location.href = "/"
+                                                            logoutOnClick()
                                                         }}
                                                         className={classes.link}
                                                         activeClassName={classes.active}

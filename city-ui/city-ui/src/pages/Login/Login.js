@@ -52,7 +52,7 @@ const Login = () => {
                 )
                 const from = location.state?.from
 
-                history.push('/')
+                history.push(from || '/')
             })
             .finally(() => setSubmitting(false))
     };

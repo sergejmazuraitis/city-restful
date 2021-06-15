@@ -12,9 +12,12 @@ const userSllice = createSlice({
     reducers: {
         login(user, { payload }) {
             return payload
+        },
+        logout(){
+            return initialState
         }
     }
 })
 
 export default userSllice.reducer
-export const { login } = userSllice.actions
+export const { login, logout } = userSllice.actions
