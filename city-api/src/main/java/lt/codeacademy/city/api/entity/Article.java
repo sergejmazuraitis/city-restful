@@ -41,6 +41,6 @@ public class Article {
     @CreationTimestamp
     private LocalDateTime timestamp = LocalDateTime.now();
 
-    @Column(columnDefinition = "CLOB")
+    @Lob
     private String image;
 }
