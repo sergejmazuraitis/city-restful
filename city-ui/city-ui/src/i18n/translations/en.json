@@ -66,5 +66,21 @@
     "YourAccount": "Your Account",
     "DeleteAccount": "Delete Account",
     "ChangeAccount": "Change Account"
+  },
+  "validations": {
+    "usernameRequired": "Username is a required field",
+    "passwordRequired": "Password is a required field",
+    "articleNameRequired": "Article Name is a required field",
+    "articleDescriptionRequired": "Article Description is a required field",
+    "articleContentRequired": "Article Content is a required field",
+    "imageRequired": "Choose image is required",
+    "nameRequired": "Name is a required field",
+    "lastnameRequired": "Lastname is a required field",
+    "emailRequired": "Email is a required field",
+    "phoneRequired": "Phone Number is a required field",
+    "passwordConfirmRequired": "Password Confirm is a required field",
+    "emailValid": "Email must be a valid email",
+    "passwordValidMin": "Password must be at least 5 characters",
+    "passwordEquals": "Password and Password Confirm not equals"
   }
 }

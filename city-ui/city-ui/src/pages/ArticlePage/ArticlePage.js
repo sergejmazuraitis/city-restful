@@ -44,7 +44,7 @@ const ArticleCard = () => {
 
     const deleteArticle = (id) => {
         deleteArticleById(id)
-            .finally(()=> (
+            .finally(() => (
                 history.push('/articles')))
     };
 
@@ -56,7 +56,13 @@ const ArticleCard = () => {
             .finally(() => setLoading(false))
     }, []);
 
-    return loading ? (<CircularProgress/>) :
+    return loading ? (
+            <div style={{
+                margin: "auto"
+            }}>
+                <CircularProgress/>
+            </div>)
+        :
         (
             <div className={classes.heroContent}>
                 <Container maxWidth="md">

@@ -12,21 +12,24 @@ import {useTranslation} from "react-i18next";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-        .required(),
+        .required("validations:nameRequired"),
     surname: Yup.string()
-        .required(),
+        .required("validations:lastnameRequired"),
+    username: Yup.string()
+        .required("validations:usernameRequired"),
     email: Yup.string()
-        .email()
-        .required(),
+        .email("validations:emailValid")
+        .required("validations:emailRequired"),
+    phone: Yup.string()
+        .required("validations:phoneRequired"),
     password: Yup.string()
-        .min(5)
-        .required(),
+        .min(5, "validations:passwordValidMin")
+        .required("validations:passwordRequired"),
     repeatPassword: Yup.string()
-        .min(5)
-        .required()
-        .oneOf([Yup.ref('password')], "Blogas")
+        .min(5, "validations:passwordValidMin")
+        .required("validations:passwordConfirmRequired")
+        .oneOf([Yup.ref('password')], "validations:passwordEquals")
 })
-
 const UserRegistration = () => {
     const {t} = useTranslation('register');
 
@@ -38,6 +41,7 @@ const UserRegistration = () => {
         phone: '',
         email: '',
         password: '',
+        repeatPassword: '',
         username: '',
         roles: ["USER"]
     };

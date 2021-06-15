@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
-        .required(),
+        .required("validations:usernameRequired"),
     password: Yup.string()
-        .required()
+        .required("validations:passwordRequired")
 });
 
 const Login = () => {

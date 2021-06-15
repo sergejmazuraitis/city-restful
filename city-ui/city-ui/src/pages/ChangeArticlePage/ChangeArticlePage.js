@@ -11,11 +11,11 @@ import {useTranslation} from "react-i18next";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-        .required(),
+        .required("validations:articleNameRequired"),
     description: Yup.string()
-        .required(),
+        .required("validations:articleDescriptionRequired"),
     content: Yup.string()
-        .required()
+        .required("validations:articleContentRequired")
 })
 
 const ChangeArticlePage = () => {

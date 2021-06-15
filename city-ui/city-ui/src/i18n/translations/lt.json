@@ -66,5 +66,22 @@
     "YourAccount": "Jūsu Paskira",
     "DeleteAccount": "Trinti paskirą",
     "ChangeAccount": "Keisti Paskirą"
+  },
+  "validations": {
+    "usernameRequired": "Vartotojo vardas yra privalomas laukas",
+    "passwordRequired": "Slaptažodis yra privalomas laukas",
+    "articleNameRequired": "Straipsnio pavadinimas yra privalomas laukas",
+    "articleDescriptionRequired": "Straipsnio santrauka yra privalomas laukas",
+    "articleContentRequired": "Straipsnio turinys yra privalomas laukas",
+    "imageRequired": "Pasirinkti nuotrauką yra pryvaloma",
+    "nameRequired": "Vardas yra privalomas laukas",
+    "lastnameRequired": "Pavardė yra privalomas laukas",
+    "emailRequired": "Elektroninis Paštas yra privalomas laukas",
+    "phoneRequired": "Telefono Numeris yra privalomas laukas",
+    "passwordConfirmRequired": "Slaptažodžio patvirtinimas yra privalomas laukas",
+    "emailValid": "Elektroninis paštas turi buti teisingai užpildytas",
+    "passwordValidMin": "Slaptažodis turi susidaryti mažiausiai iš 5 simbolių",
+    "passwordEquals": "Slaptažodis ir Slaptažodžio Patvirtinimas turi būti vienodi"
+
   }
 }
