@@ -82,25 +82,21 @@ const MainPage = (props) => {
         <>
             <Container maxWidth={"sm"} style={{margin: "15px auto", textAlign: "center"}}>
                 <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        <Link underline="none" variant="button" color="textPrimary" to="/articles"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                    <Grid item xs={12}>
+                        <Button variant="contained" to="/articles"
+                              className={classes.link}
+                                activeClassName={classes.active}
+                                component={NavLink}>
                             {t('Articles')}
-                        </Link>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Link underline="none" variant="button" color="textPrimary" to="/ads"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            {t('Ads')}
-                        </Link>
+                        </Button>
                     </Grid>
                     {
                         loginUser?.roles.includes("ADMIN") ?
                             <Grid item xs={12}>
-                                <Link underline="none" variant="button" color="textPrimary" to="/new-article"
+                                <Button variant="contained" to="/new-article"
                                       className={classes.link} activeClassName={classes.active} component={NavLink}>
                                     {t('NewArticle')}
-                                </Link>
+                                </Button>
                             </Grid>
 
                             :

@@ -78,7 +78,7 @@ public class ArticleController {
                                      @RequestParam String content) throws IOException {
 
         articleService.saveNewArticle(image, name, description, content);
-        articleService.saveImageInFileSystem(image);
+//        articleService.saveImageInFileSystem(image);
 
     }
 
