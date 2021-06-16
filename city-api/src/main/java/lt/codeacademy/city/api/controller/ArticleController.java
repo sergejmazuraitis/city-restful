@@ -3,6 +3,9 @@ package lt.codeacademy.city.api.controller;
 import lt.codeacademy.city.api.Endpoint;
 import lt.codeacademy.city.api.entity.Article;
 import lt.codeacademy.city.api.service.ArticleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -85,5 +89,17 @@ public class ArticleController {
     @GetMapping("/last")
     public List<Article> getLast5Articles() {
         return articleService.gelLast5Articles();
+    }
+
+    @GetMapping("/pages")
+    public Page<Article> getArticlesWithPages(
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<String> sortBy
+            ) {
+        return articleService.getArticlesWithPages(PageRequest.of(
+                page.orElse(0),
+                3,
+                Sort.Direction.ASC, sortBy.orElse("name")
+        ));
     }
 }

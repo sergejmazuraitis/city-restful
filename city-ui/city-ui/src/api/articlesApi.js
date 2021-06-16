@@ -39,6 +39,9 @@ const updateArticle = (articleData) => {
     return HTTP.put('/articles', formDataUpdate)
 }
 
+const getArticlesPages = (page) => HTTP.get('/articles/pages?page=' + page)
+
+
 export {
     fetchArticles,
     addNewArticle,
@@ -46,5 +49,6 @@ export {
     deleteArticleById,
     updateArticle,
     addNewArticleWithImage,
-    fetchLast5Articles
+    fetchLast5Articles,
+    getArticlesPages
 }

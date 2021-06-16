@@ -7,12 +7,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {fetchArticles} from "../../api/articlesApi";
+import {getArticlesPages} from "../../api/articlesApi";
 import {NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import {CircularProgress} from "@material-ui/core";
+import Pagination from '@material-ui/lab/Pagination';
 import {useTranslation} from "react-i18next";
-import cityBack from "../../img/city-back.jpg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,15 +52,33 @@ export default function Album() {
     const {t} = useTranslation('mainPage')
     const classes = useStyles();
     const [articles, setArticles] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [page, setPage] = React.useState(1);
 
-    useEffect(() => {
-        fetchArticles()
+    const handleChange = (event, value) => {
+        setPage(value);
+        getArticlesPages(value - 1)
             .then(({data}) => {
                 console.log(data)
                 setArticles(data)
             }).finally(() => setLoading(false))
+    };
 
+    const getingPage = () => {
+            getArticlesPages(page - 1)
+                .then(({data}) => {
+                    console.log(data)
+                    setArticles(data)
+                }).finally(() => setLoading(false))
+        }
+
+    console.log('pagenr', page)
+    useEffect(() => {
+        getArticlesPages(page - 1)
+            .then(({data}) => {
+                console.log(data)
+                setArticles(data)
+            }).finally(() => setLoading(false))
     }, [])
 
     return loading ? (
@@ -73,41 +91,44 @@ export default function Album() {
         :
         (
             <>
-                    <Container className={classes.cardGrid} maxWidth="md">
-                        <Grid container spacing={4}>
-                            {articles.map((article) => (
-                                <Grid item key={article} xs={12} sm={6} md={4}>
-                                    <Card className={classes.card}>
-                                        <CardMedia
-                                            className={classes.cardMedia}
-                                            image={"data:image/jpg;base64, " + article.image}
-                                            title={article.name}
-                                        />
-                                        <CardContent className={classes.cardContent}>
-                                            <Typography gutterBottom variant="h5"
-                                                        component="h2">
-                                                {article.name}
-                                            </Typography>
-                                            <Typography>
-                                                {article.description}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Link underline="none"
-                                                  variant="button"
-                                                  color="textPrimary"
-                                                  to={"/article/" + article.id}
-                                                  className={classes.link}
-                                                  activeClassName={classes.active}
-                                                  component={NavLink}>
-                                                {t('Read')}
-                                            </Link>
-                                        </CardActions>
-                                    </Card>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Container>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {articles.content.map((article) => (
+                            <Grid item key={article} xs={12} sm={6} md={4}>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        className={classes.cardMedia}
+                                        image={"data:image/jpg;base64, " + article.image}
+                                        title={article.name}
+                                    />
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom variant="h5"
+                                                    component="h2">
+                                            {article.name}
+                                        </Typography>
+                                        <Typography>
+                                            {article.description}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Link underline="none"
+                                              variant="button"
+                                              color="textPrimary"
+                                              to={"/article/" + article.id}
+                                              className={classes.link}
+                                              activeClassName={classes.active}
+                                              component={NavLink}>
+                                            {t('Read')}
+                                        </Link>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <div style={{marginTop: "20px"}}>
+                        <Pagination count={articles.totalPages} page={page} onChange={handleChange}/>
+                    </div>
+                </Container>
             </>
         );
 }

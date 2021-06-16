@@ -6,7 +6,10 @@ import lt.codeacademy.city.api.entity.Image;
 import lt.codeacademy.city.api.exception.ArticleNotFoundException;
 import lt.codeacademy.city.api.exception.ImageException;
 import lt.codeacademy.city.api.repository.ArticleRepository;
+import lt.codeacademy.city.api.repository.CommentRepository;
 import lt.codeacademy.city.api.repository.ImageRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -127,4 +130,7 @@ public class ArticleService {
         }
     }
 
+    public Page<Article> getArticlesWithPages(Pageable pageable) {
+        return articleRepository.findAll(pageable);
+    }
 }

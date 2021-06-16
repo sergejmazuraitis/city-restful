@@ -41,7 +41,7 @@ public class CommentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void creteNewComment(@Valid @RequestBody Comment comment) {
-        commentService.addComment(comment);
+                commentService.addComment(comment);
     }
 
     @PutMapping(Endpoint.NEW_COMMENT)
