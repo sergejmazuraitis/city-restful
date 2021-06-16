@@ -45,5 +45,4 @@ public class Comment {
     @Size(min = 1,
             max = 250)
     private String username;
-
 }

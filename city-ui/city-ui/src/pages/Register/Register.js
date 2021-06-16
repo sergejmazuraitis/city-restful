@@ -139,6 +139,6 @@ const UserRegistration = () => {
             }
         </Formik>
     )
-}
+};
 
-export default UserRegistration
+export default UserRegistration;

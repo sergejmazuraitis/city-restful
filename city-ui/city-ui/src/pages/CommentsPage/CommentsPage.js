@@ -43,7 +43,7 @@ const CommentsPage = () => {
     const {id} = useParams();
     const {t} = useTranslation('oftenUse');
     const userId = useSelector(state => state.user.loginUser?.id);
-    const username = useSelector(state => state.user.loginUser?.username);;
+    const username = useSelector(state => state.user.loginUser?.username);
     const user = useSelector(state => state.user);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -63,7 +63,6 @@ const CommentsPage = () => {
     }, []);
 
     useEffect(() => {
-        // componentDidMount && componentDidUpdate
         fetchComments(id)
             .then(({data}) => {
                 setComments(data)
@@ -91,9 +90,9 @@ const CommentsPage = () => {
             .finally(
                 setComments(comments.filter(com => com.commentId !== comment.commentId))
             )
-    }
+    };
 
-    const classes = useStyle()
+    const classes = useStyle();
 
     return (
         <Formik initialValues={initialValues}
@@ -192,6 +191,6 @@ const CommentsPage = () => {
             )}
         </Formik>
     )
-}
+};
 
-export default CommentsPage
+export default CommentsPage;

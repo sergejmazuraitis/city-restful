@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "bolder",
         color: "yellow"
     }
-
 }));
 
 const ArticleCard = () => {
@@ -119,6 +118,6 @@ const ArticleCard = () => {
                 </Container>
             </div>
         )
-}
+};
 
-export default ArticleCard
+export default ArticleCard;

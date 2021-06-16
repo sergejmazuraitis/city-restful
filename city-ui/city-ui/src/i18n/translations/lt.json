@@ -8,7 +8,7 @@
     "Login": "Prisijungti",
     "Logout": "Atsijungti",
     "Hello": "Labas,",
-    "MyAccount": "Mano Paskira",
+    "MyAccount": "Mano Paskyra",
     "City": "Miestas"
   },
   "login": {
@@ -40,7 +40,7 @@
     "Submitting": "Pateikimas..."
   },
   "register": {
-    "ChangeAccount": "Keisti paskirą",
+    "ChangeAccount": "Keisti paskyrą",
     "Registration": "Registracija",
     "Name": "Vardas",
     "Lastname": "Pavardė",
@@ -63,9 +63,9 @@
     "Submitting": "Pateikimas..."
   },
   "myAccount": {
-    "YourAccount": "Jūsu Paskira",
-    "DeleteAccount": "Trinti paskirą",
-    "ChangeAccount": "Keisti Paskirą"
+    "YourAccount": "Jūsų Paskyra",
+    "DeleteAccount": "Trinti paskyrą",
+    "ChangeAccount": "Keisti Paskyrą"
   },
   "validations": {
     "usernameRequired": "Vartotojo vardas yra privalomas laukas",
@@ -73,15 +73,14 @@
     "articleNameRequired": "Straipsnio pavadinimas yra privalomas laukas",
     "articleDescriptionRequired": "Straipsnio santrauka yra privalomas laukas",
     "articleContentRequired": "Straipsnio turinys yra privalomas laukas",
-    "imageRequired": "Pasirinkti nuotrauką yra pryvaloma",
+    "imageRequired": "Pasirinkti nuotrauką yra privaloma",
     "nameRequired": "Vardas yra privalomas laukas",
     "lastnameRequired": "Pavardė yra privalomas laukas",
     "emailRequired": "Elektroninis Paštas yra privalomas laukas",
     "phoneRequired": "Telefono Numeris yra privalomas laukas",
     "passwordConfirmRequired": "Slaptažodžio patvirtinimas yra privalomas laukas",
-    "emailValid": "Elektroninis paštas turi buti teisingai užpildytas",
+    "emailValid": "Elektroninis paštas turi būti teisingai užpildytas",
     "passwordValidMin": "Slaptažodis turi susidaryti mažiausiai iš 5 simbolių",
     "passwordEquals": "Slaptažodis ir Slaptažodžio Patvirtinimas turi būti vienodi"
-
   }
 }

@@ -4,7 +4,7 @@ const {createSlice} = require("@reduxjs/toolkit");
 const initialState = {
     loginUser: null,
     jwt: null
-}
+};
 
 const userSllice = createSlice({
     name: 'user',
@@ -17,7 +17,7 @@ const userSllice = createSlice({
             return initialState
         }
     }
-})
+});
 
-export default userSllice.reducer
-export const { login, logout } = userSllice.actions
+export default userSllice.reducer;
+export const { login, logout } = userSllice.actions;

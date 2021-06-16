@@ -54,7 +54,6 @@ public class ArticleController {
                               @RequestParam UUID uuid) throws IOException {
 
         articleService.updateArticle(image, name, description, content, uuid);
-        articleService.saveImageInFileSystem(image);
     }
 
     @DeleteMapping(Endpoint.UUID_VAR)
@@ -64,15 +63,6 @@ public class ArticleController {
         articleService.deleteArticle(uuid);
     }
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void saveArticleWithImage(@RequestParam MultipartFile multipartFile,
-//                                     @RequestParam String name,
-//                                     @RequestParam String description,
-//                                     @RequestParam String content) throws IOException {
-//        articleService.saveNewArticle(multipartFile, name, description, content);
-//    }
-//
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
@@ -80,10 +70,7 @@ public class ArticleController {
                                      @RequestParam String name,
                                      @RequestParam String description,
                                      @RequestParam String content) throws IOException {
-
         articleService.saveNewArticle(image, name, description, content);
-//        articleService.saveImageInFileSystem(image);
-
     }
 
     @GetMapping("/last")

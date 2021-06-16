@@ -159,6 +159,6 @@ const ChangeUserPage = () => {
                 }
             </Formik>
         )
-}
+};
 
-export default ChangeUserPage
+export default ChangeUserPage;

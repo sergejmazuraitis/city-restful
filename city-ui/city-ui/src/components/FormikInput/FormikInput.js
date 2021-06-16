@@ -17,6 +17,6 @@ const FormikInput = ({name, label, error, placeholder = "Type...", ...props}) =>
             </ErrorMessage>
         </FormControl>
     )
-}
+};
 
-export default FormikInput
+export default FormikInput;

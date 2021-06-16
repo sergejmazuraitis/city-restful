@@ -2,12 +2,9 @@ package lt.codeacademy.city.api.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,10 +26,4 @@ public class Image {
 
     @Column(columnDefinition = "int")
     private long size;
-
-//    @Lob
-//    private byte[] bytes;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "image")
-//    private List<Article> articles;
 }

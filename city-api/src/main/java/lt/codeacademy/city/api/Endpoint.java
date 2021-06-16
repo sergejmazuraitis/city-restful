@@ -3,7 +3,6 @@ package lt.codeacademy.city.api;
 public interface Endpoint {
     String UUID = "UUID";
 
-    String API_ROOT = "/city/api";
     String ARTICLES = "/articles";
     String UUID_VAR = "/{" + UUID + "}";
     String COMMENTS = ARTICLES + UUID_VAR + "/comments";

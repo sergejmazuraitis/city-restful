@@ -65,18 +65,10 @@ const MainPage = (props) => {
     useEffect(() => {
         fetchLast5Articles()
             .then(({data}) => {
-                console.log(data)
                 setArticles(data)
             }).finally(() => setLoading(false))
 
-    }, [])
-
-
-    const [value, setValue] = React.useState('recents');
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    }, []);
 
     return (
         <>
@@ -139,7 +131,6 @@ const Item = (props) =>
                    style={{
                        backgroundImage: `url("data:image/jpg;base64, ${props.item.image}")`
                    }}>
-                {/* Increase the priority of the hero background image */}
                 {<img style={{display: 'none'}} src={"data:image/jpg;base64, " + props.item.image}/>}
                 <div className={classes.overlay}/>
                 <Grid container>
@@ -165,6 +156,6 @@ const Item = (props) =>
             </Paper>
         </Container>
     )
-}
+};
 
-export default MainPage
+export default MainPage;

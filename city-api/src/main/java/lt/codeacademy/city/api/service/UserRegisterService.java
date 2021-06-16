@@ -55,7 +55,7 @@ public class UserRegisterService {
         }
     }
 
-    public void deleteUser (UUID id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
 }

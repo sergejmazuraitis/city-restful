@@ -14,7 +14,7 @@ const constructStore = () => {
     })
 
     return store
-}
+};
 
-const store = constructStore()
-export default store
+const store = constructStore();
+export default store;

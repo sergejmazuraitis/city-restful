@@ -39,6 +39,6 @@ const Error = () => {
             </Container>
         </>
     )
-}
+};
 
-export default Error
+export default Error;

@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
         .required("validations:articleDescriptionRequired"),
     content: Yup.string()
         .required("validations:articleContentRequired")
-})
+});
 
 const NewArticlePage = () => {
     const {t} = useTranslation('newArticle');
@@ -27,10 +27,10 @@ const NewArticlePage = () => {
         description: '',
         content: '',
         image: null
-    }
+    };
     const FileUpload = () => {
         document.getElementById('file').click();
-    }
+    };
 
     const postNewArticle = (newArticle, {setSubmitting, resetForm}) => {
         setSubmitting(true)
@@ -42,7 +42,7 @@ const NewArticlePage = () => {
             })
             .finally(() => setSubmitting(false))
 
-    }
+    };
 
 
     return (
@@ -123,6 +123,6 @@ const NewArticlePage = () => {
             }
         </Formik>
     )
-}
+};
 
-export default NewArticlePage
+export default NewArticlePage;

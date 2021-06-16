@@ -4,11 +4,11 @@ import {MenuItem} from "@material-ui/core";
 import React from "react";
 
 const LanguageSelector = () => {
-    const {t, i18n} = useTranslation();
+    const {i18n} = useTranslation();
 
     const handleLanguageChange = (e) => {
         i18n.changeLanguage(e.target.value);
-    }
+    };
 
 
     return (
@@ -21,6 +21,6 @@ const LanguageSelector = () => {
             <MenuItem value='lt'>LT</MenuItem>
         </Select>
     )
-}
+};
 
-export default LanguageSelector
+export default LanguageSelector;

@@ -2,10 +2,8 @@ package lt.codeacademy.city.api.service;
 
 import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.city.api.entity.Comment;
-import lt.codeacademy.city.api.exception.ArticleNotFoundException;
 import lt.codeacademy.city.api.exception.CommentNotFoundException;
 import lt.codeacademy.city.api.repository.CommentRepository;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Content from "./components/Content/index"
 import {Provider} from "react-redux";
 import store from "./store";
-import cityBack from "./img/city-back.jpg";
+import city3 from "./img/city3.jpg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        backgroundImage: `url(${cityBack})`,
+        backgroundImage: `url(${city3})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

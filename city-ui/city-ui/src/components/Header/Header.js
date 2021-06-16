@@ -41,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default () => {
+const Header = () => {
     const classes = useStyles();
     const loginUser = useSelector(state => state.user.loginUser)
     const {t} = useTranslation('header');
-    const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
@@ -58,10 +58,6 @@ export default () => {
         console.log(from)
         history.push(from || '/')
     }
-
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -173,4 +169,6 @@ export default () => {
 
         </>
     )
-}
+};
+
+export default Header;

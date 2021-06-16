@@ -1,4 +1,4 @@
-import {deleteUserById, getUserById} from '../../api/userRegisterApi'
+import {deleteUserById, getUserById} from '../../api/userRegisterApi';
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -36,7 +36,7 @@ const MyAccountPage = () => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
-    const userId = useSelector(state => state.user.loginUser?.id)
+    const userId = useSelector(state => state.user.loginUser?.id);
 
     const deleteUser = (id) => {
         deleteUserById(id)
@@ -92,6 +92,6 @@ const MyAccountPage = () => {
                 </Card>
             </Container>
         );
-}
+};
 
-export default MyAccountPage
+export default MyAccountPage;

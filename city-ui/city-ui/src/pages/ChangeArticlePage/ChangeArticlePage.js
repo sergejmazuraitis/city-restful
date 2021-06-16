@@ -145,5 +145,5 @@ const ChangeArticlePage = () => {
             </Formik>
 
         )
-}
-export default ChangeArticlePage
+};
+export default ChangeArticlePage;

@@ -12,7 +12,6 @@ import Link from "@material-ui/core/Link";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {useTranslation} from "react-i18next";
-import PropsState from "../../components/PropsState/PropsState";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,14 +41,10 @@ const Login = () => {
 
     const postLogin = (loginData, {setSubmitting}) => {
 
-
         setSubmitting(true)
 
         loginUser(loginData)
-
             .then(({data: loginUser, headers: {authorization}}) => {
-                console.log("headers", authorization)
-                console.log("user", loginUser)
                 dispatch(
                     setLogin({
                         loginUser,
@@ -61,7 +56,6 @@ const Login = () => {
             })
             .catch(error => console.log(error))
             .finally(() => setSubmitting(false))
-
     };
 
     return (
@@ -73,7 +67,6 @@ const Login = () => {
                 onSubmit={postLogin}>
             {props => (
                 <>
-                    <PropsState {...props}/>
                     <Container maxWidth={"sm"} style={{margin: "auto"}}>
                         <Paper elevation={3} style={{margin: "auto", padding: "20px 0"}}>
                             <Form style={{margin: "15px 40px", textAlign: "center"}}>
@@ -136,6 +129,6 @@ const Login = () => {
             )}
         </Formik>
     )
-}
+};
 
-export default Login
+export default Login;

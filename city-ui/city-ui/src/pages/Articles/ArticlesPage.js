@@ -59,24 +59,13 @@ export default function Album() {
         setPage(value);
         getArticlesPages(value - 1)
             .then(({data}) => {
-                console.log(data)
                 setArticles(data)
             }).finally(() => setLoading(false))
     };
 
-    const getingPage = () => {
-            getArticlesPages(page - 1)
-                .then(({data}) => {
-                    console.log(data)
-                    setArticles(data)
-                }).finally(() => setLoading(false))
-        }
-
-    console.log('pagenr', page)
     useEffect(() => {
         getArticlesPages(page - 1)
             .then(({data}) => {
-                console.log(data)
                 setArticles(data)
             }).finally(() => setLoading(false))
     }, [])
@@ -126,7 +115,11 @@ export default function Album() {
                         ))}
                     </Grid>
                     <div style={{marginTop: "20px"}}>
-                        <Pagination count={articles.totalPages} page={page} onChange={handleChange}/>
+                        <Pagination variant="contained"
+                                    shape="rounded"
+                                    count={articles.totalPages}
+                                    page={page}
+                                    onChange={handleChange}/>
                     </div>
                 </Container>
             </>
